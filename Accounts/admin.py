@@ -14,8 +14,8 @@ class UserModelAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields' : ('username', 'email', 'password1', 'password2', 'prodi', 'roles')
-        })
+            'fields' : ('username', 'email', 'password1', 'password2', 'prodi', 'roles')}
+        ),
     )
 
 admin.site.register(ProgramStudi)
