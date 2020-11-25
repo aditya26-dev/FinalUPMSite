@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'FinalUPM',
+    'upmsite',
     'Accounts',
 ]
 
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'FinalUPM.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['FinalUPM/Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
