@@ -2,125 +2,144 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/webpage.css'%}"> 
+    <link rel="stylesheet" href="{% static 'css/main.css'%}"> 
     <title>Prasetiya Mulya UPM</title>
   </head>
   <body>
     <div id="wrapper">
-      <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
           <img src="https://www.prasetiyamulya.ac.id/wp-content/uploads/2019/08/Universitas-Prasetiya-Mulya_logo_01-Putih.png" alt="" class="logo" style="width: 230px; height: auto;">
-          <li>
-            <a href="/informasi_umum/peraturan"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Peraturan</a>
-          </li>
-          <li>
-            <a href="/informasi_umum/standar_universitas"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span> Standard Universitas</a>
-          </li>
-          <li>
-            <a href="/informasi_umum/standar_sekolah"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span> Standard Sekolah</a>
-          </li>
-          <li>
-            <a href="/informasi_umum/buku_panduan"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span> Buku Panduan</a>
-          </li>
-          <li>
-            <a href="/informasi_umum/lain_lain"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span> Lain Lain</a>
-          </li>
-        </ul>
+          <div class="accordion navigation_menu pt-3" id="accordionExample">
+            <div class="card card1">
+              <div class="card-header card1-2" id="headingOne">
+                <h2 class="mb-0"></h2>
+                <a class="btn btn-link btn-block text-left button1" type="button" href="#">
+                    Informasi Umum
+                  </a>
+                </h2>
+              </div>
+            </div>
+
+
+            <div class="card card1">
+              <div class="card-header card1-2" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                   Audit Mutu Internal <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                  Umum
+                </a>
+                <div class="accordion navigation_menu ml-1" id="accordionExampleTwo">
+                  <div class="card-header card1-2" id="headingFour">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Prodi <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Business Mathematics
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Food Business Technology
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Renewable Energy Engineering
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Computer System Engineering
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Software Technology
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Product Design Technology
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card1">
+              <div class="card-header card1-2" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                   Akreditasi BAN PT <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExampleThree">
+                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                  Umum
+                </a>
+                <div class="accordion navigation_menu ml-1" id="accordionExampleThree">
+                  <div class="card-header card1-2" id="headingFive">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Prodi <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExampleThree">
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Business Mathematics
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Food Business Technology
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Renewable Energy Engineering
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Computer System Engineering
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Software Technology
+                    </a>
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      Product Design Technology
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
       </div>
+    </div>
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Informasi umum
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/informasi_umum/peraturan">Peratuan</a>
-                <a class="dropdown-item" href="/informasi_umum/standar_universitas">Standard Universitas</a>
-                <a class="dropdown-item" href="/informasi_umum/standar_sekolah">Standard Sekolah</a>
-                <a class="dropdown-item" href="/informasi_umum/buku_panduan">Buku Panduan</a>
-                <a class="dropdown-item" href="/informasi_umum/lain_lain">Lain Lain</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Audit Mutu Internal
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/ami_umum">Digital Business Technology</a>
-                <a class="dropdown-item" href="/ami_umum/20182">Product Design Engineering</a>
-                <a class="dropdown-item" href="/ami_umum/20191">Computer System Engineering</a>
-                <a class="dropdown-item" href="/ami_umum/20192">Rewnable Engergy Engineering</a>
-                <a class="dropdown-item" href="/ami_umum/20201">Food Business Technology</a>
-                <a class="dropdown-item" href="/ami_umum/20202">Business Mathematics</a>
-                <a class="dropdown-item" href="/ami_umum/resources">Resousces</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Akreditasi Ban-PT
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/akreditasi/instrumen">Digital Business Technology</a>
-                <a class="dropdown-item" href="/akreditasi/sosialisasi">Product Design Engineering</a>
-                <a class="dropdown-item" href="/akreditasi/mom_komite">Computer System Engineering</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-1">Rewnable Engergy Engineering</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-2">Food Business Technology</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-3">Business Mathematics</a>
-                <!--<a class="dropdown-item" href="/akreditasi/kriteria-4">Kriteria4</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-5">Kriteria5</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-6">Kriteria6</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-7">Kriteria7</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-8">Kriteria8</a>
-                <a class="dropdown-item" href="/akreditasi/kriteria-9">Kriteria9</a>
-                <a class="dropdown-item" href="/akreditasi/LKPT_LED">LKPT dan LED</a>-->
-              </div>
-          </ul>
-          <div class="search my-0 mr-md-auto border border-secondary col-md-3 col-sm-4">
-            <input class="input-sm border-0 p-2 col-md-11" type="text" placeholder="Search for anything">
+        <div class="search1 ml-4">
+          <input class="input-sm border-0 p-2 col-md-11 input_search1" type="text" placeholder="Search anything...">
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-     
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{request.user.first_name}} {{request.user.last_name}} 
+                Hello, Nama User 
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                </svg>  Pengaturan profil</a>
-                <a class="dropdown-item" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                  <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                  <circle cx="8" cy="4.5" r="1"/>
-                </svg>    Informasi penting</a>
-                <a class="dropdown-item" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
-                  <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
-                </svg>    Settings</a>
-                <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                  </svg>    Log out</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
               </div>
             </li>
           </ul>
@@ -134,11 +153,8 @@
     </nav>
     </nav>
     {% block content %}
-    
-     {% endblock %}
-    
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
