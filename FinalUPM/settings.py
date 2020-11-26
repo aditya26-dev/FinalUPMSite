@@ -56,7 +56,7 @@ ROOT_URLCONF = 'FinalUPM.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['FinalUPM/Templates'],
+        'DIRS': ['Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,4 +121,16 @@ AUTH_USER_MODEL = 'Accounts.User'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ os.path.join(BASE_DIR,"static"),]
+STATICFILES_DIRS = [
+    "static",
+]
+
+#SMTP Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gaizka.valencia2@gmail.com'
+EMAIL_HOST_PASSWORD = 'AgaNasta12'
+
