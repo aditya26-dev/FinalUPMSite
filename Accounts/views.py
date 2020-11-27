@@ -13,6 +13,7 @@ def loginPage(request):
 
         user = authenticate(request, username=username, password=password)
 
+
         if user is not None:
             login(request, user)
             return redirect("home")
@@ -25,8 +26,6 @@ def logoutUser(request):
     logout(request)
     return redirect("login")
 
-@login_required(login_url='login')
-def home(request):
-    return render(request, 'main.html')
+
 
 

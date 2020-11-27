@@ -3,14 +3,19 @@ from django.urls import path, include, re_path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from Accounts import views
+from Accounts import views as views_account
+from upmsite import views as views_upmsite
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',views.loginPage, name="login"),
-    path('logout/', views.logoutUser, name="logout"),
-    path('home/', views.home, name="home"),
+    #account 
+
+    path('login/',views_account.loginPage, name="login"),
+    path('logout/', views_account.logoutUser, name="logout"),
+
+    #upm site 
+    path('home/', views_upmsite.home, name="home"),
 
     # ____________ RESET PASSWORD ____________
 
