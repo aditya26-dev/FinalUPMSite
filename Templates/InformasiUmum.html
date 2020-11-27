@@ -13,6 +13,7 @@
   </section>
 
   <section class="folder-card">
+    {%for item in informasiUmum%}
       <div class="box-inside" style="margin-left: 15rem; margin-top: 2rem;">
       <div class="row">
         <div class="col-sm-6">
@@ -21,7 +22,7 @@
             <div class="card-body">
               <div class="card-inside">
                   <div class="card-text-inside">
-                      <h5 class="card-title">Ini judul</h5>
+                      <h5 class="card-title">{{item.nama_folder}}</h5>
                       <p class="card-text">Ini subtitle</p>
                   </div>
                   <div>
@@ -32,23 +33,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="card card3">
-            <img src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" class="card-img-top card3-img" alt="">
-            <div class="card-body">
-              <div class="card-inside">
-                  <div class="card-text-inside">
-                      <h5 class="card-title">Ini judul</h5>
-                      <p class="card-text">Ini subtitle</p>
-                  </div>
-                  <div>
-                      <a href="#" class="btn btn-success mr-3 btn-card-menu">Open</a>
-                      <a href="#" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {%endfor%}
   </section>
 
     {% endblock %}

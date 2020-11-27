@@ -17,6 +17,9 @@ urlpatterns = [
     #upm site 
     path('home/', views_upmsite.home, name="home"),
 
+    path('BukuPanduan/', views_upmsite.BukuPanduan, name="Buku_Panduan"),
+    path('informasiumum/', views_upmsite.InformasiUmum, name="Informasi_Umum"),
+
     # ____________ RESET PASSWORD ____________
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="UPM_Reset_Password.html"), name="reset_password"),
