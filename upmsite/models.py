@@ -16,7 +16,7 @@ class Folder(models.Model):
     )
 
     nama_folder = models.CharField(default='', max_length=256)
-    nama_prodi = models.ForeignKey(Prodi, on_delete=models.CASCADE)
+    nama_prodi = models.ForeignKey(Prodi, on_delete=models.CASCADE, blank = True, null = True)
     kategori = models.CharField(max_length=50, choices=listKategori)
     public_status = models.BooleanField(default = True)
 
