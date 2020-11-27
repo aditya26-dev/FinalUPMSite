@@ -1,0 +1,18 @@
+.DS_Store
+
+### Django ###
+*.log
+*.pot
+*.pyc
+.env
+env/
+db.sqlite3
+
+_pycache_/
+
+Accounts/migrations/*
+!Accounts/migrations/_init_.py
+upmsite/migrations/*
+!upmsite/migrations/_init_.py
+FinalUPM/migrations/*
+!FinalUPM/migrations/_init_.py
