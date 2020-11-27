@@ -10,9 +10,9 @@ db.sqlite3
 
 _pycache_/
 
-account/migrations/*
-!account/migrations/_init_.py
-api/migrations/*
-!api/migrations/_init_.py
+Accounts/migrations/*
+!Accounts/migrations/_init_.py
+upmsite/migrations/*
+!upmsite/migrations/_init_.py
 FinalUPM/migrations/*
 !FinalUPM/migrations/_init_.py
