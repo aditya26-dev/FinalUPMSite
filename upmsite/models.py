@@ -31,7 +31,7 @@ class File(models.Model):
     public_status = models.BooleanField(default=True)
 
     def __str__(self):
-        return '{}'.format(self.nama_file)
+        return '{} {}'.format(self.nama_file, self.nama_folder)
 
 class SubFolder01(models.Model):
     

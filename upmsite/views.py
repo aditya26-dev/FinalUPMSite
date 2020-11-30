@@ -9,9 +9,15 @@ def home(request):
     return render(request, 'main.html')
 
 def BukuPanduan(request):
-    return render(request, 'BukuPanduan.html')
+    bukuPanduan = models.File.objects.filter(nama_folder='1')
+    print(bukuPanduan)
+    context = {
+        'bukupanduan': bukuPanduan
+    }
+    return render(request, 'BukuPanduan.html', context)
 
 def InformasiUmum(request):
+    #link = request.
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
     print(informasiUmum)
     # kemudian pass konten ke main.html 
@@ -19,3 +25,13 @@ def InformasiUmum(request):
         'informasiUmum': informasiUmum
     }
     return render(request, 'InformasiUmum.html', context)
+
+def SubFolderInformasiUmum(request, pk):
+    files = models.File.objects.filter(nama_folder__id = pk)
+    #informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
+    #print(informasiUmum)
+    # kemudian pass konten ke main.html 
+    context = {
+        'files': files,
+    }
+    return render(request, 'SubInformasiUmum.html', context)
