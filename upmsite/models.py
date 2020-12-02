@@ -31,7 +31,7 @@ class File(models.Model):
     public_status = models.BooleanField(default=True)
 
     def __str__(self):
-        return '{} {}'.format(self.nama_file, self.nama_folder)
+        return '{} ({})'.format(self.nama_file, self.nama_folder)
 
 class SubFolder01(models.Model):
     
@@ -39,7 +39,7 @@ class SubFolder01(models.Model):
     parent_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{}'.format(self.nama_folder)
+        return '{} ({})'.format(self.nama_folder, self.parent_folder)
 
 class SubFile01(models.Model):
 
@@ -56,7 +56,7 @@ class SubFolder02(models.Model):
     parent_folder = models.ForeignKey(SubFolder01, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{}'.format(self.nama_folder)
+        return '{} ({})'.format(self.nama_folder, self.parent_folder)
 
 
 class SubFile02(models.Model):

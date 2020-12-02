@@ -1,17 +1,26 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 
 <section>
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'Informasi_Umum' %}">Informasi Umum</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'sub_informasi_umum' pkjudul %}">{{judul}}</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'sub_folder_informasi_umum1' pkjudul1 %}">{{judul1.nama_folder}}</a></li>
+        
+        <li class="breadcrumb-item active" aria-current="page" href="">{{judul2.nama_folder}}</li>
+  
       </ol>
   </nav>
 </section>
 
   <section class="page-title" style="margin-left: 17.9rem; ">
-      <h3 class="font-weight-bold">Informasi Umum</h3>
+      <h3 class="font-weight-bold">{{judul2.nama_folder}}</h3>
       <p class="font-weight-light">Universitas Prasetiya Mulya</p>
+      
       <a class="btn btn-primary">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -21,14 +30,31 @@
       </a>
   </section>
 
-  <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
-    <div class="list-group">
-      {%for item in informasiUmum%}
-        
-        <a type="button" class="list-group-item list-group-item-action button" href="{% url 'sub_informasi_umum' item.id %}">
-          {{item.nama_folder}}
-        </a>
-      {%endfor%}
+
+
+  <section class="folder-card">
+    <div class="box-inside">
+    <div class="row">
+      {% for file in subfile2 %}
+      <div class="col-sm-6" data-role="card-menus">
+        <div class="card card3">
+          <img src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" class="card-img-top card3-img" alt="">
+          <div class="card-body">
+            <div class="card-inside">
+                <div class="card-text-inside">
+                    <h5 class="card-title">{{file.nama_file}}</h5>
+                    <p class="card-text">Ini subtitle</p>
+                </div>
+                <div>
+                    <a href="{% static file.file_attachment.url %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
+                    <a href="#" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
     </div>
   </section>
 

@@ -20,6 +20,8 @@ urlpatterns = [
     path('bukupanduan/', views_upmsite.BukuPanduan, name="Buku_Panduan"),
     path('informasiumum/', views_upmsite.InformasiUmum, name="Informasi_Umum"),
     path('subinformasiumum/<int:pk>/', views_upmsite.SubFolderInformasiUmum, name="sub_informasi_umum"),
+    path('subfolderinformasiumum1/<int:pk>/', views_upmsite.SubFolderInformasiUmum1, name="sub_folder_informasi_umum1"),
+    path('subfileinformasiumum1/<int:pk>/', views_upmsite.SubFileInformasiUmum1, name="sub_file_informasi_umum1"),
 
     # ____________ RESET PASSWORD ____________
 
