@@ -1,0 +1,94 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assets/dashboard1.css' %}">
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #132F64; height: 100px;">
+            <a class="navbar-brand" href="">
+                <img class="title-logo" src="{% static 'media/logo-prasmul.png' %}" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="">Informasi Umum <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Akreditasi
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="">Umum</a>
+                      <a class="dropdown-item" href="">Prodi</a>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Audit
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Umum</a>
+                      <a class="dropdown-item" href="">Prodi</a>
+                    </div>
+                  </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                  
+                  <div class="input-group-prepend" style="height: 2.4rem; border-radius: 0px;">
+                    <input type="text" class="form-control" style="border-radius: 0px;" placeholder="Search" aria-label="search" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                      </svg></span>
+                  </div>
+                  <a class="btn btn-danger mx-1" href="{% url 'logout' %}" style="width: 150px;" href="#" role="button">Log Out</a>
+              </form>
+            </div>
+          </nav>
+    </section>
+
+
+<!-- Main -->
+<form method="POST">
+{% csrf_token %}
+<main role="main" class="">
+    <div class="btn-dashboard" style="padding-top: 0px !important;">
+      <div class="right-box">
+        <div class="box-inside">
+            <form>
+                <div class="form-group">
+                  <label for="InputNamaFile" style="text-align: left;">Nama File</label>
+                  {%render_field form.nama_file class="form-control" placeholder="nama file"%}
+                </div>
+                <div class="form-group">
+                  <label for="InputNamaFile">File Attachment</label>
+                  {%render_field form.file_attachment class="form-control" placeholder="nama file"%}
+                </div>
+                <button type="submit" class="btn btn-save btn-primary">Save</button>
+              </form> 
+        </div>
+    </div>
+    </div>
+</main>
+</form>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</body>
+</html>

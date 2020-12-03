@@ -69,4 +69,3 @@ class SubFile02(models.Model):
         return '{}'.format(self.nama_file)
 
 
-

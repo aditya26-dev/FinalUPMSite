@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from upmsite import models
+from upmsite import models, forms
 
 @login_required(login_url='login')
 def home(request):
@@ -15,6 +15,14 @@ def BukuPanduan(request):
         'bukupanduan': bukuPanduan
     }
     return render(request, 'BukuPanduan.html', context)
+
+def Peraturan(request):
+    peraturan = models.File.objects.filter(nama_folder='4')
+    print(peraturan)
+    context = {
+        'peraturan': peraturan
+    }
+    return render(request, 'peraturan.html', context)
 
 def InformasiUmum(request):
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
@@ -81,3 +89,110 @@ def SubFileInformasiUmum1(request, pk):
         'judul2': judul2,
     }
     return render(request, 'SubFileInformasiUmum1.html', context)
+
+def AddFileBukuPanduan(request):
+
+    form = forms.FormAddFileBukuPanduan()
+    context = {
+        'form': form,
+    }
+
+    if request.method == 'POST':
+            post = request.POST
+            nama_file = post['nama_file']
+            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
+            file_attachment = post['file_attachment']
+            public_status = True
+            new_file = models.File(
+                nama_file = nama_file,
+                nama_folder = nama_folder,
+                file_attachment = file_attachment,
+                public_status = public_status,
+            )
+            new_file.save()
+            return redirect('Buku_Panduan')
+
+    return render(request, 'AddFile.html', context)
+
+def UpdateFileBukuPanduan(request, id): 
+
+    obj = get_object_or_404(models.File, id = id) 
+  
+
+    form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
+    context = {
+        'form': form,
+    }
+  
+    if form.is_valid(): 
+        form.save() 
+        return redirect('Buku_Panduan') 
+  
+  
+    return render(request, "AddFile.html", context)
+
+def DeleteFileBukuPanduan(request, id): 
+    context ={} 
+  
+    obj = get_object_or_404(models.File, id = id) 
+  
+  
+    if request.method =="POST": 
+        obj.delete() 
+        return redirect('Buku_Panduan')
+  
+    return render(request, "DeleteConfirmation.html", context) 
+
+
+def AddFilePeraturan(request):
+
+    form = forms.FormAddFilePeraturan()
+    context = {
+        'form': form,
+    }
+
+    if request.method == 'POST':
+            post = request.POST
+            nama_file = post['nama_file']
+            nama_folder = models.Folder.objects.get(nama_folder = 'Peraturan-Peraturan')
+            file_attachment = post['file_attachment']
+            public_status = True
+            new_file = models.File(
+                nama_file = nama_file,
+                nama_folder = nama_folder,
+                file_attachment = file_attachment,
+                public_status = public_status,
+            )
+            new_file.save()
+            return redirect('Buku_Panduan')
+
+    return render(request, 'AddFile.html', context)
+
+def UpdateFilePeraturan(request, id): 
+
+    obj = get_object_or_404(models.File, id = id) 
+  
+
+    form = forms.FormAddFilePeraturan(request.POST or None, instance = obj) 
+    context = {
+        'form': form,
+    }
+  
+    if form.is_valid(): 
+        form.save() 
+        return redirect('Buku_Panduan') 
+  
+  
+    return render(request, "AddFile.html", context)
+
+def DeleteFilePeraturan(request, id): 
+    context ={} 
+  
+    obj = get_object_or_404(models.File, id = id) 
+  
+  
+    if request.method =="POST": 
+        obj.delete() 
+        return redirect('Buku_Panduan')
+  
+    return render(request, "DeleteConfirmation.html", context) 
