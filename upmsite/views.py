@@ -126,7 +126,14 @@ def UpdateFileBukuPanduan(request, id):
             post = request.POST
             obj.nama_file = post['nama_file']
             nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
-            obj.file_attachment = post['file_attachment']
+            if post['file_attachment'] == "":
+                obj.file_attachment = obj.file_attachment
+                print("kosong")
+                print(post['file_attachment'])
+            else:
+                obj.file_attachment = post['file_attachment']
+                print("isi")
+                print(post['file_attachment'])
             public_status = True
             obj.save()
             return redirect('Buku_Panduan')
