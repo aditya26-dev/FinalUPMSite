@@ -8,6 +8,8 @@ def home(request):
     # kemudian pass konten ke main.html 
     return render(request, 'main.html')
 
+#------ Informasi Umum-------
+
 def BukuPanduan(request):
     bukuPanduan = models.File.objects.filter(nama_folder='1')
     print(bukuPanduan)
@@ -89,6 +91,8 @@ def SubFileInformasiUmum1(request, pk):
         'judul2': judul2,
     }
     return render(request, 'InformasiUmum/SubFileInformasiUmum1.html', context)
+
+#------- CRUD Informasi UMUM ---------
 
 def AddFileBukuPanduan(request):
 
@@ -207,3 +211,30 @@ def DeleteFilePeraturan(request, id):
         return redirect('Buku_Panduan')
   
     return render(request, "DeleteConfirmation.html", context) 
+
+#------- Akreditasi BAN PT -------
+
+def ABPTUmum(request):
+    abptUmum = models.Folder.objects.filter(kategori='ABPT')
+    print(abptUmum)
+    context = {
+        'abptUmum': abptUmum
+    }
+    return render(request, 'BANPT/BANPTumum.html', context)
+
+pkjudulabptumum = 0
+def SubFolderABPTUmum(request, pk):
+    subfolderabptumum1 = models.SubFolder01.objects.filter(parent_folder__id = pk)
+    filesabptumum = models.File.objects.filter(nama_folder__id = pk)
+    judulabptumum = models.Folder.objects.get(id = pk)
+    global pkjudulabptumum
+    pkjudulabptumum = pk
+
+    context = {
+        'filesabptumum': filesabptumum,
+        'subfolderabptumum1': subfolderabptumum1,
+        'judulabptumum': judulabptumum,
+    }
+    return render(request, 'BANPT/SubBANPT.html', context)
+def pkjudulabptumumdef():
+    return pkjudulabptumum
