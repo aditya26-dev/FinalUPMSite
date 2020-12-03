@@ -1,12 +1,7 @@
 from django.db import models
+from Accounts.models import ProgramStudi
 
 # Create your models here.
-class Prodi(models.Model):
-    nama_prodi = models.CharField(default='', max_length=256)
-
-    def __str__(self):
-        return '{}'.format(self.nama_prodi)
-
 class Folder(models.Model):
 
     listKategori = (
@@ -16,7 +11,7 @@ class Folder(models.Model):
     )
 
     nama_folder = models.CharField(default='', max_length=256)
-    nama_prodi = models.ForeignKey(Prodi, on_delete=models.CASCADE, blank = True, null = True)
+    nama_prodi = models.ForeignKey(ProgramStudi, on_delete=models.CASCADE, blank = True, null = True)
     kategori = models.CharField(max_length=50, choices=listKategori)
     public_status = models.BooleanField(default = True)
 
