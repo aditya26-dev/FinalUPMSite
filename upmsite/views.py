@@ -116,18 +116,22 @@ def AddFileBukuPanduan(request):
 
 def UpdateFileBukuPanduan(request, id): 
 
+    context ={} 
+  
     obj = get_object_or_404(models.File, id = id) 
   
-
     form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
-    context = {
-        'form': form,
-    }
   
-    if form.is_valid(): 
-        form.save() 
-        return redirect('Buku_Panduan') 
+    if request.method == 'POST':
+            post = request.POST
+            obj.nama_file = post['nama_file']
+            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
+            obj.file_attachment = post['file_attachment']
+            public_status = True
+            obj.save()
+            return redirect('Buku_Panduan')
   
+    context["form"] = form 
   
     return render(request, "AddFile.html", context)
 
