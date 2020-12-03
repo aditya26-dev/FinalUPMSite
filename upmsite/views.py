@@ -26,7 +26,6 @@ def Peraturan(request):
 
 def InformasiUmum(request):
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
-    print(informasiUmum)
     context = {
         'informasiUmum': informasiUmum
     }
@@ -91,13 +90,15 @@ def SubFileInformasiUmum1(request, pk):
     return render(request, 'SubFileInformasiUmum1.html', context)
 
 def AddFileBukuPanduan(request):
+    folderinfoumum = pkjuduldef()
+    data = models.Folder.objects.get(id=folderinfoumum)
+    nama_folder = data.nama_folder
 
-    form = forms.FormAddFileBukuPanduan()
-    context = {
-        'form': form,
-    }
+    print(nama_folder)
 
-    if request.method == 'POST':
+    if nama_folder == 'Buku Panduan':
+        form = forms.FormAddFileBukuPanduan()
+        if request.method == 'POST':
             post = request.POST
             nama_file = post['nama_file']
             nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
@@ -110,37 +111,75 @@ def AddFileBukuPanduan(request):
                 public_status = public_status,
             )
             new_file.save()
-            return redirect('Buku_Panduan')
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
+    elif nama_folder == 'Peraturan-Peraturan':
+        form = forms.FormAddFilePeraturan()
+        if request.method == 'POST':
+            post = request.POST
+            nama_file = post['nama_file']
+            nama_folder = models.Folder.objects.get(nama_folder = 'Peraturan-Peraturan')
+            file_attachment = post['file_attachment']
+            public_status = True
+            new_file = models.File(
+                nama_file = nama_file,
+                nama_folder = nama_folder,
+                file_attachment = file_attachment,
+                public_status = public_status,
+            )
+            new_file.save()
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
 
-    return render(request, 'AddFile.html', context)
-
-def UpdateFileBukuPanduan(request, id): 
-
-    obj = get_object_or_404(models.File, id = id) 
-  
-
-    form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
     context = {
         'form': form,
     }
+    return render(request, 'AddFile.html', context)
+
+def UpdateFileBukuPanduan(request, id): 
+    folderinfoumum = pkjuduldef()
+    data = models.Folder.objects.get(id=folderinfoumum)
+    nama_folder = data.nama_folder
+
+    context ={} 
   
-    if form.is_valid(): 
-        form.save() 
-        return redirect('Buku_Panduan') 
-  
+    if nama_folder == 'Buku Panduan':
+        obj = get_object_or_404(models.File, id = id) 
+        form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
+        if request.method == 'POST':
+            post = request.POST
+            obj.nama_file = post['nama_file']
+            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
+            obj.file_attachment = post['file_attachment']
+            public_status = True
+            obj.save()
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
+    elif nama_folder =='Peraturan-Peraturan':
+        obj = get_object_or_404(models.File, id = id) 
+        form = forms.FormAddFilePeraturan(request.POST or None, instance = obj) 
+        if form.is_valid(): 
+            form.save() 
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
+
+    context["form"] = form 
   
     return render(request, "AddFile.html", context)
 
 def DeleteFileBukuPanduan(request, id): 
+    folderinfoumum = pkjuduldef()
+    data = models.Folder.objects.get(id=folderinfoumum)
+    nama_folder = data.nama_folder
+
     context ={} 
-  
-    obj = get_object_or_404(models.File, id = id) 
-  
-  
-    if request.method =="POST": 
-        obj.delete() 
-        return redirect('Buku_Panduan')
-  
+
+    if nama_folder == 'Buku Panduan':
+        obj = get_object_or_404(models.File, id = id) 
+        if request.method =="POST": 
+            obj.delete() 
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
+    elif nama_folder == 'Peraturan-Peraturan':
+        obj = get_object_or_404(models.File, id = id) 
+        if request.method =="POST": 
+            obj.delete() 
+            return redirect('sub_informasi_umum', pk=folderinfoumum)
     return render(request, "DeleteConfirmation.html", context) 
 
 
@@ -196,3 +235,19 @@ def DeleteFilePeraturan(request, id):
         return redirect('Buku_Panduan')
   
     return render(request, "DeleteConfirmation.html", context) 
+
+def AMIUmum(request):
+    files = models.File.objects.filter(nama_folder__nama_folder='AMI Umum')
+
+    context = {
+        'files': files,
+    }
+    return render(request, 'AMIUmum.html', context)
+
+def AMIProdi(request):
+    folder = models.SubFolder01.objects.filter(parent_folder__nama_folder = 'AMI Prodi')
+
+    context = {
+        'folder': folder,
+    }
+    return render(request, 'AMIProdi.html', context)

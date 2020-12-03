@@ -14,6 +14,10 @@ urlpatterns = [
     path('login/',views_account.loginPage, name="login"),
     path('logout/', views_account.logoutUser, name="logout"),
 
+    #ami umum
+    path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
+    path('amiprodi/', views_upmsite.AMIProdi, name='ami_prodi'),
+
     #upm site 
     path('home/', views_upmsite.home, name="home"),
 
