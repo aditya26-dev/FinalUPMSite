@@ -14,7 +14,7 @@ def BukuPanduan(request):
     context = {
         'bukupanduan': bukuPanduan
     }
-    return render(request, 'BukuPanduan.html', context)
+    return render(request, 'InformasiUmum/BukuPanduan.html', context)
 
 def Peraturan(request):
     peraturan = models.File.objects.filter(nama_folder='4')
@@ -22,7 +22,7 @@ def Peraturan(request):
     context = {
         'peraturan': peraturan
     }
-    return render(request, 'peraturan.html', context)
+    return render(request, 'InformasiUmum/peraturan.html', context)
 
 def InformasiUmum(request):
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
@@ -30,7 +30,7 @@ def InformasiUmum(request):
     context = {
         'informasiUmum': informasiUmum
     }
-    return render(request, 'InformasiUmum.html', context)
+    return render(request, 'InformasiUmum/InformasiUmum.html', context)
 
 pkjudul = 0
 def SubFolderInformasiUmum(request, pk):
@@ -45,7 +45,7 @@ def SubFolderInformasiUmum(request, pk):
         'subfolder1': subfolder1,
         'judul': judul,
     }
-    return render(request, 'SubInformasiUmum.html', context)
+    return render(request, 'InformasiUmum/SubInformasiUmum.html', context)
 def pkjuduldef():
     return pkjudul
 
@@ -66,7 +66,7 @@ def SubFolderInformasiUmum1(request, pk):
         'judul': judul,
         'judul1': judul1,
     }
-    return render(request, 'SubFolderInformasiUmum1.html', context)
+    return render(request, 'InformasiUmum/SubFolderInformasiUmum1.html', context)
 def pkjuduldef1():
     return pkjudul1
 
@@ -88,7 +88,7 @@ def SubFileInformasiUmum1(request, pk):
         'pkjudul1': pkjudul1,
         'judul2': judul2,
     }
-    return render(request, 'SubFileInformasiUmum1.html', context)
+    return render(request, 'InformasiUmum/SubFileInformasiUmum1.html', context)
 
 def AddFileBukuPanduan(request):
 
