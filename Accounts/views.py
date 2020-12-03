@@ -20,7 +20,7 @@ def loginPage(request):
         else :
             messages.info(request, 'Email or Password is incorrect')
 
-    return render(request, 'UPM_Login.html')
+    return render(request, 'Account/UPM_Login.html')
 
 def logoutUser(request):
     logout(request)

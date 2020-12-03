@@ -109,7 +109,7 @@
                 </h2>
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="https://www.google.com">
+                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ABPT_Umum' %}">
                   Umum
                 </a>
                 <div class="accordion navigation_menu" id="accordionExampleThree">
@@ -178,7 +178,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Nama User 
+                  Hello, {{user.first_name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Pengaturan profil</a>

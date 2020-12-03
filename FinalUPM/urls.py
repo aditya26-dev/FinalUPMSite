@@ -21,12 +21,17 @@ urlpatterns = [
     #upm site 
     path('home/', views_upmsite.home, name="home"),
 
+    #----- INFORMASI UMUM -------
     path('bukupanduan/', views_upmsite.BukuPanduan, name="Buku_Panduan"),
     path('peraturan/', views_upmsite.Peraturan, name="Peraturan"),
     path('informasiumum/', views_upmsite.InformasiUmum, name="Informasi_Umum"),
     path('subinformasiumum/<int:pk>/', views_upmsite.SubFolderInformasiUmum, name="sub_informasi_umum"),
     path('subfolderinformasiumum1/<int:pk>/', views_upmsite.SubFolderInformasiUmum1, name="sub_folder_informasi_umum1"),
     path('subfileinformasiumum1/<int:pk>/', views_upmsite.SubFileInformasiUmum1, name="sub_file_informasi_umum1"),
+
+    #------ AKREDITASI BAN PT ------
+    path('abptumum/', views_upmsite.ABPTUmum, name="ABPT_Umum"),
+    path('subabptumum/<int:pk>/', views_upmsite.SubFolderABPTUmum, name="sub_ABPT_Umum"),
 
     # ____________ RESET PASSWORD ____________
 
