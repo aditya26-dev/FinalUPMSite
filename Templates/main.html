@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <section class="left_navigation">
+    <section class="left_navigation" id="leftSidebar">
         <!--Logo prasmul-->
         <img src="https://lms.prasetiyamulya.ac.id/pluginfile.php/1/core_admin/logo/0x200/1601623298/logo_upm_putih.png" class="prasmul_logo pt-3">
 
@@ -38,7 +38,7 @@
             <div class="card card1">
               <div class="card-head card1-2" id="headingTwo">
                 <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <button class="btn btn-link btn-block text-left collapsed button1" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <div class="button-content-2">
                         <div>Audit Mutu Internal</div>
                         <div class="caret">
@@ -50,14 +50,14 @@
                   </button>
                 </h2>
               </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div id="collapseTwo" class="collapse buttonTest2" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ami_umum' %}">
                   Umum
                 </a>
                 <div class="accordion navigation_menu" id="accordionExampleTwo">
                   <div class="card-head card1-2" id="headingFour">
                     <h2 class="mb-0">
-                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <div class="button-content-3">
                           <div>Prodi</div>
                           <div class="caret">
@@ -69,7 +69,7 @@
                       </button>
                     </h2>
                   </div>
-                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
+                  <div id="collapseFour" class="collapse buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
                     <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
                       Business Mathematics
                     </a>
@@ -96,7 +96,7 @@
             <div class="card card1">
               <div class="card-head card1-2" id="headingThree">
                 <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left collapsed button1" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <button class="btn btn-link btn-block text-left collapsed button1" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <div class="button-content-2">
                       <div>Akreditasi BAN PT</div>
                       <div class="caret">
@@ -108,14 +108,14 @@
                   </button>
                 </h2>
               </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div id="collapseThree" class="collapse buttonTest2" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ABPT_Umum' %}">
                   Umum
                 </a>
                 <div class="accordion navigation_menu" id="accordionExampleThree">
                   <div class="card-head card1-2" id="headingFive">
                     <h2 class="mb-0">
-                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                         <div class="button-content-3">
                           <div>Prodi</div>
                           <div class="caret">
@@ -127,7 +127,7 @@
                       </button>
                     </h2>
                   </div>
-                  <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExampleThree">
+                  <div id="collapseFive" class="collapse buttonTest2" aria-labelledby="headingFive" data-parent="#accordionExampleThree">
                     <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
                       Business Mathematics
                     </a>
@@ -168,10 +168,17 @@
         </div>
     </section> 
 
-    <section>
+    <section id="rightScreen">
         <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
-          <div class="search1">
-            <input class="input-sm border-0 p-2 col-md-11 input_search1" id="searchbox" type="text" placeholder="Search anything...">
+          <div class="right-menu">
+            <button class="btn" id="sidebarCollapse">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </button>
+            <div class="search1 ml-4">
+              <input class="input-sm border-0 p-2 col-md-11 input_search1" id="searchbox" type="text" placeholder="Search anything...">
+            </div>
           </div>
 
           <div class="profile-area">
