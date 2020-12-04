@@ -144,7 +144,6 @@ def UpdateFileBukuPanduan(request, id):
     nama_folder = data.nama_folder
 
     context ={} 
-<<<<<<< HEAD
   
     if nama_folder == 'Buku Panduan':
         obj = get_object_or_404(models.File, id = id) 
@@ -164,29 +163,6 @@ def UpdateFileBukuPanduan(request, id):
             form.save() 
             return redirect('sub_informasi_umum', pk=folderinfoumum)
 
-=======
-  
-    obj = get_object_or_404(models.File, id = id) 
-  
-    form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
-  
-    if request.method == 'POST':
-            post = request.POST
-            obj.nama_file = post['nama_file']
-            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
-            if post['file_attachment'] == "":
-                obj.file_attachment = obj.file_attachment
-                print("kosong")
-                print(post['file_attachment'])
-            else:
-                obj.file_attachment = post['file_attachment']
-                print("isi")
-                print(post['file_attachment'])
-            public_status = True
-            obj.save()
-            return redirect('Buku_Panduan')
-  
->>>>>>> 8626c9c220f5c8d0557dd14f6867b228a245962b
     context["form"] = form 
   
     return render(request, "AddFile.html", context)
@@ -264,7 +240,6 @@ def DeleteFilePeraturan(request, id):
   
     return render(request, "DeleteConfirmation.html", context) 
 
-<<<<<<< HEAD
 def AMIUmum(request):
     files = models.File.objects.filter(nama_folder__nama_folder='AMI Umum')
 
@@ -280,7 +255,6 @@ def AMIProdi(request):
         'folder': folder,
     }
     return render(request, 'AMIProdi.html', context)
-=======
 #------- Akreditasi BAN PT -------
 
 def ABPTUmum(request):
@@ -307,4 +281,3 @@ def SubFolderABPTUmum(request, pk):
     return render(request, 'BANPT/SubBANPT.html', context)
 def pkjudulabptumumdef():
     return pkjudulabptumum
->>>>>>> 8626c9c220f5c8d0557dd14f6867b228a245962b

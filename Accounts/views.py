@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.models import User
 from .decorators import unauthenticated_user
+from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
+from Accounts import models
+
 
 # Create your views here.
 @unauthenticated_user
@@ -26,6 +30,17 @@ def logoutUser(request):
     logout(request)
     return redirect("login")
 
+# @login_required(login_url='login')
+
+class akun(TemplateView):
+
+    template_name = "Accounts/User.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_users = User.objects.values()
+        context['username'] = all_users
+        return context
 
 
 

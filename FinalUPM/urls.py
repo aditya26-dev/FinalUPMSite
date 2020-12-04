@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from Accounts import views as views_account
 from upmsite import views as views_upmsite
+from Accounts.views import akun
 
 
 urlpatterns = [
@@ -13,6 +14,7 @@ urlpatterns = [
 
     path('login/',views_account.loginPage, name="login"),
     path('logout/', views_account.logoutUser, name="logout"),
+    path('akun/', akun.as_view(), name='akun'),
 
     #ami umum
     path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
