@@ -10,6 +10,7 @@ from Accounts.views import akun
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views_account.loginPage, name="landingPage"),
     #account 
 
     path('login/',views_account.loginPage, name="login"),
