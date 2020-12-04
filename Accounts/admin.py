@@ -7,7 +7,7 @@ from .models import ProgramStudi, User, Account
 class UserModelAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields' : ('email', 'username', 'password')}),
-        ('Personal Detail', {'fields' : ('first_name', 'last_name', 'prodi', 'roles')}),
+        ('Personal Detail', {'fields' : ('first_name', 'last_name', 'prodi', 'roles','profile_picture')}),
         ('Permissions', {'fields' : ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields' : ('last_login', 'date_joined')}),
     )

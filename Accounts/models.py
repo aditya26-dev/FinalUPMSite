@@ -20,5 +20,6 @@ class User(AbstractUser):
         ('Professional Staf', 'Professional Staf')
     )
     roles = models.CharField(choices=role_list, max_length=40)
+    profile_picture = models.ImageField(null=True, blank=True)
 
     objects = UserManager

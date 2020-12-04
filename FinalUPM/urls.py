@@ -16,6 +16,7 @@ urlpatterns = [
     path('login/',views_account.loginPage, name="login"),
     path('logout/', views_account.logoutUser, name="logout"),
     path('akun/', akun.as_view(), name='akun'),
+    path('settinguser/', views_upmsite.pengaturanakun, name="pengaturan_Akun"),
 
     #ami umum
     path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
@@ -38,10 +39,10 @@ urlpatterns = [
 
     # ____________ RESET PASSWORD ____________
 
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="UPM_Reset_Password.html"), name="reset_password"),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="UPM_Reset_Password_sent.html"), name="password_reset_done"),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="UPM_Reset_Password_form.html"), name="password_reset_confirm"),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="UPM_Reset_Password_done.html"), name="password_reset_complete"),
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="Account/UPM_Reset_Password.html"), name="reset_password"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="Account/UPM_Reset_Password_sent.html"), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="Account/UPM_Reset_Password_form.html"), name="password_reset_confirm"),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="Account/UPM_Reset_Password_done.html"), name="password_reset_complete"),
 
 
     path('addfile_bukupanduan', views_upmsite.FileonFolderCreate.as_view(), name="AddFile_BukuPanduan"),
@@ -49,4 +50,4 @@ urlpatterns = [
     path('deletefile_bukupanduan/<id>', views_upmsite.DeleteFileBukuPanduan, name="DeleteFile_BukuPanduan")
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

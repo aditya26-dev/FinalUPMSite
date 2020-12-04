@@ -10,6 +10,9 @@ def home(request):
     # kemudian pass konten ke main.html 
     return render(request, 'main.html')
 
+def pengaturanakun(request):
+    return render(request,"Account/Pengaturan_Akun.html")
+
 #------ Informasi Umum-------
 
 def BukuPanduan(request):
