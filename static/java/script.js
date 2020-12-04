@@ -11,7 +11,7 @@ $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#leftSidebar').toggleClass('toggled');
         $('#rightScreen').toggleClass('toggled'); 
-        document.getElementById('buttonTest').setAttribute('aria-expanded', 'false');
+        $('#buttonTest').attr("aria-expanded","false");
         $('.button1').addClass('collapsed');   
         $('.buttonTest2').removeClass('show');
     });
