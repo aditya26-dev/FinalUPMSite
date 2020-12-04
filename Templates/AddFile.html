@@ -11,16 +11,9 @@
         
         <section class="form-area">
             <div class="box-inside">
-                <form method="POST" class="mt-4">
+                <form method="POST" class="mt-4" enctype="multipart/form-data">
                   {% csrf_token %}
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1" class="font-weight-bold">File Name</label>
-                        {%render_field form.nama_file class="form-control" placeholder="nama file"%}
-                      </div>
-                    <div class="form-group">
-                      <label for="exampleFormControlFile1" class="font-weight-bold">File Attachment</label>
-                      {%render_field form.file_attachment class="form-control" placeholder="nama file"%}
-                    </div>
+                    {{form.as_p}}                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div> 

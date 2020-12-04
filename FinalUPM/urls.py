@@ -43,7 +43,9 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="UPM_Reset_Password_done.html"), name="password_reset_complete"),
 
 
-    path('addfile_bukupanduan', views_upmsite.AddFileBukuPanduan, name="AddFile_BukuPanduan"),
+    path('addfile_bukupanduan', views_upmsite.FileonFolderCreate.as_view(), name="AddFile_BukuPanduan"),
     path('updatefile_bukupanduan/<id>', views_upmsite.UpdateFileBukuPanduan, name="UpdateFile_BukuPanduan"),
     path('deletefile_bukupanduan/<id>', views_upmsite.DeleteFileBukuPanduan, name="DeleteFile_BukuPanduan")
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

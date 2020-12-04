@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from upmsite import models, forms
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 @login_required(login_url='login')
 def home(request):
@@ -92,6 +94,12 @@ def SubFileInformasiUmum1(request, pk):
     return render(request, 'InformasiUmum/SubFileInformasiUmum1.html', context)
 
 #------- CRUD Informasi UMUM ---------
+
+class FileonFolderCreate(CreateView):
+    model = models.File
+    template_name = "AddFile.html"
+    form_class = forms.FormAddFileBukuPanduan
+    success_url = reverse_lazy('home')
 
 def AddFileBukuPanduan(request):
     folderinfoumum = pkjuduldef()
