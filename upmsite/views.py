@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from upmsite import models, forms
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from Accounts import models as models_account
 
 @login_required(login_url='login')
 def home(request):
@@ -32,9 +33,19 @@ def Peraturan(request):
     return render(request, 'InformasiUmum/peraturan.html', context)
 
 def InformasiUmum(request):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+    print(semua_prodi)
+
+
+
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
     context = {
-        'informasiUmum': informasiUmum
+        'informasiUmum': informasiUmum,
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
     }
     return render(request, 'InformasiUmum/InformasiUmum.html', context)
 
@@ -50,6 +61,7 @@ def SubFolderInformasiUmum(request, pk):
         'files': files,
         'subfolder1': subfolder1,
         'judul': judul,
+        'pk': pk,
     }
     return render(request, 'InformasiUmum/SubInformasiUmum.html', context)
 def pkjuduldef():
@@ -96,20 +108,35 @@ def SubFileInformasiUmum1(request, pk):
     }
     return render(request, 'InformasiUmum/SubFileInformasiUmum1.html', context)
 
+def ABPTProdi(request):
+    context = {
+
+    }
+    return render(request, 'abptprodi.html', context)
+
 #------- CRUD Informasi UMUM ---------
 
 class FileonFolderCreate(CreateView):
-    model = models.File
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'nama_folder':pk,
+        }
+    # data = models.Folder.objects.get(id=folderinfoumum)
+    # print(data)
+
     template_name = "AddFile.html"
     form_class = forms.FormAddFileBukuPanduan
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
 def AddFileBukuPanduan(request):
     folderinfoumum = pkjuduldef()
     data = models.Folder.objects.get(id=folderinfoumum)
     nama_folder = data.nama_folder
-
-    print(nama_folder)
 
     if nama_folder == 'Buku Panduan':
         form = forms.FormAddFileBukuPanduan()

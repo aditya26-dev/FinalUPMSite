@@ -37,6 +37,8 @@ urlpatterns = [
     path('abptumum/', views_upmsite.ABPTUmum, name="ABPT_Umum"),
     path('subabptumum/<int:pk>/', views_upmsite.SubFolderABPTUmum, name="sub_ABPT_Umum"),
 
+    path('abpt/prodi', views_upmsite.ABPTProdi , name="ABPT_Prodi"),
+
     # ____________ RESET PASSWORD ____________
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="Account/UPM_Reset_Password.html"), name="reset_password"),
@@ -45,7 +47,7 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="Account/UPM_Reset_Password_done.html"), name="password_reset_complete"),
 
 
-    path('addfile_bukupanduan', views_upmsite.FileonFolderCreate.as_view(), name="AddFile_BukuPanduan"),
+    path('addfile_bukupanduan/<int:pk>', views_upmsite.FileonFolderCreate.as_view(), name="AddFile_BukuPanduan"),
     path('updatefile_bukupanduan/<id>', views_upmsite.UpdateFileBukuPanduan, name="UpdateFile_BukuPanduan"),
     path('deletefile_bukupanduan/<id>', views_upmsite.DeleteFileBukuPanduan, name="DeleteFile_BukuPanduan")
 ]

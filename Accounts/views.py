@@ -21,7 +21,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect("home")
+            return redirect("Informasi_Umum")
         else :
             messages.info(request, 'Email or Password is incorrect')
 

@@ -21,8 +21,8 @@ class Folder(models.Model):
 class File(models.Model):
 
     nama_file = models.CharField(max_length=250)
-    nama_folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
-    file_attachment = models.FileField()
+    nama_folder = models.ForeignKey(Folder, on_delete=models.CASCADE, blank = True, null = True)
+    file_attachment = models.FileField(blank = True, null = True)
     public_status = models.BooleanField(default=True)
 
     def __str__(self):
