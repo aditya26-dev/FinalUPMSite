@@ -83,6 +83,7 @@ def SubFolderInformasiUmum1(request, pk):
         'pkjudul': pkjudul,
         'judul': judul,
         'judul1': judul1,
+        'pk': pk,
     }
     return render(request, 'InformasiUmum/SubFolderInformasiUmum1.html', context)
 def pkjuduldef1():
@@ -205,6 +206,52 @@ class DeleteSubFolder01(DeleteView):
 
     def get_success_url(self):
         tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+
+class AddSubFolder02(CreateView):
+    def get_initial(self):
+        pk = pkjuduldef1()
+        return {
+            'parent_folder':pk,
+        }
+
+    template_name = "AddSubFolder1.html"
+    form_class = forms.FormAddSubFolder2
+
+    def get_success_url(self):
+        tes=pkjuduldef1()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+
+class UpdateSubFolder02(UpdateView):
+    def get_initial(self):
+        pk = pkjuduldef1()
+        return {
+            'parent_folder':pk,
+        }
+
+    template_name = "AddFile.html"
+    model = models.SubFolder02
+    form_class = forms.FormAddSubFolder2
+
+    def get_success_url(self):
+        tes=pkjuduldef1()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+
+class DeleteSubFolder02(DeleteView):
+    def get_initial(self):
+        pk = pkjuduldef1()
+        return {
+            'nama_folder':pk,
+        }
+    
+    template_name = "DeleteConfirmation.html"
+    model = models.SubFolder02
+
+    def get_success_url(self):
+        tes=pkjuduldef1()
         print(tes)
         return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
     

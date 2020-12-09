@@ -18,3 +18,8 @@ class FormAddSubFolder1(ModelForm):
     class Meta:
         model = SubFolder01
         fields = '__all__'
+
+class FormAddSubFolder2(ModelForm):
+    class Meta:
+        model = SubFolder02
+        fields = '__all__'
