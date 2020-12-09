@@ -36,9 +36,6 @@ def InformasiUmum(request):
     roles = request.user.roles
     prodi = request.user.prodi
     semua_prodi = models_account.ProgramStudi.objects.all()
-    print(semua_prodi)
-
-
 
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
     context = {
@@ -51,6 +48,10 @@ def InformasiUmum(request):
 
 pkjudul = 0
 def SubFolderInformasiUmum(request, pk):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk)
     files = models.File.objects.filter(nama_folder__id = pk)
     judul = models.Folder.objects.get(id = pk)
@@ -58,6 +59,9 @@ def SubFolderInformasiUmum(request, pk):
     pkjudul = pk
 
     context = {
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
         'files': files,
         'subfolder1': subfolder1,
         'judul': judul,
@@ -69,6 +73,10 @@ def pkjuduldef():
 
 pkjudul1 = 0
 def SubFolderInformasiUmum1(request, pk):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     subfolder2 = models.SubFolder02.objects.filter(parent_folder__id = pk)
     
     pkjudul = pkjuduldef()
@@ -79,6 +87,9 @@ def SubFolderInformasiUmum1(request, pk):
     pkjudul1 = pk
 
     context = {
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
         'subfolder2': subfolder2,
         'pkjudul': pkjudul,
         'judul': judul,
@@ -89,7 +100,12 @@ def SubFolderInformasiUmum1(request, pk):
 def pkjuduldef1():
     return pkjudul1
 
+pkjudul2 = 0
 def SubFileInformasiUmum1(request, pk):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     subfile2 = models.SubFile02.objects.filter(nama_folder__id = pk)
     pkjudul = pkjuduldef()
     judul = models.Folder.objects.get(id = pkjudul)
@@ -98,16 +114,24 @@ def SubFileInformasiUmum1(request, pk):
     judul1 = models.SubFolder01.objects.get(id = pkjudul1)
 
     judul2 = models.SubFolder02.objects.get(id = pk)
+    global pkjudul2
+    pkjudul2 = pk
 
     context = {
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
         'subfile2': subfile2,
         'judul': judul,
         'pkjudul': pkjudul,
         'judul1': judul1,
         'pkjudul1': pkjudul1,
         'judul2': judul2,
+        'pk' : pk,
     }
     return render(request, 'InformasiUmum/SubFileInformasiUmum1.html', context)
+def pkjuduldef2():
+    return pkjudul2
 
 def ABPTProdi(request):
     context = {
@@ -222,7 +246,7 @@ class AddSubFolder02(CreateView):
     def get_success_url(self):
         tes=pkjuduldef1()
         print(tes)
-        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+        return reverse_lazy('sub_folder_informasi_umum1', kwargs={'pk': tes})
 
 class UpdateSubFolder02(UpdateView):
     def get_initial(self):
@@ -238,7 +262,7 @@ class UpdateSubFolder02(UpdateView):
     def get_success_url(self):
         tes=pkjuduldef1()
         print(tes)
-        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+        return reverse_lazy('sub_folder_informasi_umum1', kwargs={'pk': tes})
 
 class DeleteSubFolder02(DeleteView):
     def get_initial(self):
@@ -253,35 +277,105 @@ class DeleteSubFolder02(DeleteView):
     def get_success_url(self):
         tes=pkjuduldef1()
         print(tes)
-        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+        return reverse_lazy('sub_folder_informasi_umum1', kwargs={'pk': tes})
+
+class FileonFolderCreate2(CreateView):
+    def get_initial(self):
+        pk = pkjuduldef2()
+        return {
+            'nama_folder':pk,
+        }
+
+    template_name = "AddFile.html"
+    form_class = forms.FormAddSubFile2
+
+    def get_success_url(self):
+        tes=pkjuduldef2()
+        print(tes)
+        return reverse_lazy('sub_file_informasi_umum1', kwargs={'pk': tes})
+
+class UpdateFileonFolder2(UpdateView):
+    def get_initial(self):
+        pk = pkjuduldef2()
+        return {
+            'nama_folder':pk,
+        }
+
+    template_name = "AddFile.html"
+    model = models.SubFile02
+    form_class = form_class = forms.FormAddSubFile2
+
+    def get_success_url(self):
+        tes=pkjuduldef2()
+        print(tes)
+        return reverse_lazy('sub_file_informasi_umum1', kwargs={'pk': tes})
+
+class DeleteFileonFolder2(DeleteView):
+    def get_initial(self):
+        pk = pkjuduldef2()
+        return {
+            'nama_folder':pk,
+        }
+    
+    template_name = "DeleteConfirmation.html"
+    model = models.SubFile02
+
+    def get_success_url(self):
+        tes=pkjuduldef2()
+        print(tes)
+        return reverse_lazy('sub_file_informasi_umum1', kwargs={'pk': tes})
     
 def AMIUmum(request):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
     files = models.File.objects.filter(nama_folder__nama_folder='AMI Umum')
 
     context = {
         'files': files,
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
     }
     return render(request, 'AMIUmum.html', context)
 
 def AMIProdi(request):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     folder = models.SubFolder01.objects.filter(parent_folder__nama_folder = 'AMI Prodi')
 
     context = {
         'folder': folder,
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
     }
     return render(request, 'AMIProdi.html', context)
 #------- Akreditasi BAN PT -------
 
 def ABPTUmum(request):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     abptUmum = models.Folder.objects.filter(kategori='ABPT')
     print(abptUmum)
     context = {
-        'abptUmum': abptUmum
+        'abptUmum': abptUmum,
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
     }
     return render(request, 'BANPT/BANPTumum.html', context)
 
 pkjudulabptumum = 0
 def SubFolderABPTUmum(request, pk):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
     subfolderabptumum1 = models.SubFolder01.objects.filter(parent_folder__id = pk)
     filesabptumum = models.File.objects.filter(nama_folder__id = pk)
     judulabptumum = models.Folder.objects.get(id = pk)
@@ -289,6 +383,9 @@ def SubFolderABPTUmum(request, pk):
     pkjudulabptumum = pk
 
     context = {
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
         'filesabptumum': filesabptumum,
         'subfolderabptumum1': subfolderabptumum1,
         'judulabptumum': judulabptumum,

@@ -23,3 +23,15 @@ class FormAddSubFolder2(ModelForm):
     class Meta:
         model = SubFolder02
         fields = '__all__'
+
+class FormAddSubFile2(ModelForm):
+    class Meta:
+        model = SubFile02
+        fields = '__all__'
+
+        widgets = {
+            'nama_file' : forms.TextInput(attrs={'class': 'input', 'placeholder' : 'fileName'}),
+            'nama_folder' : forms.Select(attrs={'class': 'form-control'}),
+            'file_attachment' : forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'public_status' : forms.CheckboxInput()
+        }

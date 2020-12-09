@@ -59,6 +59,10 @@ urlpatterns = [
     path('update_subfolder02/<int:pk>', views_upmsite.UpdateSubFolder02.as_view(), name="UpdateSubFolder_02"),
     path('delete_subfolder02/<int:pk>', views_upmsite.DeleteSubFolder02.as_view(), name="DeleteSubFolder_02"),
 
+    path('addfile_subfile02/<int:pk>', views_upmsite.FileonFolderCreate2.as_view(), name="AddSubFile_02"),
+    path('updatefile_subfile02/<int:pk>', views_upmsite.UpdateFileonFolder2.as_view(), name="UpdateSubFile_02"),
+    path('deletefile_subfile02/<int:pk>', views_upmsite.DeleteFileonFolder2.as_view(), name="DeleteSubFile_02"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

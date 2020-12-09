@@ -45,7 +45,8 @@
                 </div>
                 <div>
                     <a href="{% url 'sub_file_informasi_umum1' itemfolder.id %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
-                    <a href="#" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'UpdateSubFolder_02' pk=itemfolder.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'DeleteSubFolder_02' pk=itemfolder.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
                 </div>
             </div>
           </div>
