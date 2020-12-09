@@ -48,8 +48,13 @@ urlpatterns = [
 
 
     path('addfile_bukupanduan/<int:pk>', views_upmsite.FileonFolderCreate.as_view(), name="AddFile_BukuPanduan"),
-    path('updatefile_bukupanduan/<id>', views_upmsite.UpdateFileBukuPanduan, name="UpdateFile_BukuPanduan"),
-    path('deletefile_bukupanduan/<id>', views_upmsite.DeleteFileBukuPanduan, name="DeleteFile_BukuPanduan")
+    path('updatefile_bukupanduan/<int:pk>', views_upmsite.UpdateFileonFolder.as_view(), name="UpdateFile_BukuPanduan"),
+    path('deletefile_bukupanduan/<int:pk>', views_upmsite.DeleteFileonFolder.as_view(), name="DeleteFile_BukuPanduan"),
+
+    path('addsubfolder01/<int:pk>', views_upmsite.AddSubFolder01.as_view(), name="AddSubFolder_01"),
+    path('update_subfolder01/<int:pk>', views_upmsite.UpdateSubFolder01.as_view(), name="UpdateSubFolder_01"),
+    path('delete_subfolder01/<int:pk>', views_upmsite.DeleteSubFolder01.as_view(), name="DeleteSubFolder_01"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

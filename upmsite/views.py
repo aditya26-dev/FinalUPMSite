@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from upmsite import models, forms
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from Accounts import models as models_account
 
@@ -122,8 +122,6 @@ class FileonFolderCreate(CreateView):
         return {
             'nama_folder':pk,
         }
-    # data = models.Folder.objects.get(id=folderinfoumum)
-    # print(data)
 
     template_name = "AddFile.html"
     form_class = forms.FormAddFileBukuPanduan
@@ -133,151 +131,83 @@ class FileonFolderCreate(CreateView):
         print(tes)
         return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
-def AddFileBukuPanduan(request):
-    folderinfoumum = pkjuduldef()
-    data = models.Folder.objects.get(id=folderinfoumum)
-    nama_folder = data.nama_folder
+class UpdateFileonFolder(UpdateView):
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'nama_folder':pk,
+        }
 
-    if nama_folder == 'Buku Panduan':
-        form = forms.FormAddFileBukuPanduan()
-        if request.method == 'POST':
-            post = request.POST
-            nama_file = post['nama_file']
-            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
-            file_attachment = post['file_attachment']
-            public_status = True
-            new_file = models.File(
-                nama_file = nama_file,
-                nama_folder = nama_folder,
-                file_attachment = file_attachment,
-                public_status = public_status,
-            )
-            new_file.save()
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
-    elif nama_folder == 'Peraturan-Peraturan':
-        form = forms.FormAddFilePeraturan()
-        if request.method == 'POST':
-            post = request.POST
-            nama_file = post['nama_file']
-            nama_folder = models.Folder.objects.get(nama_folder = 'Peraturan-Peraturan')
-            file_attachment = post['file_attachment']
-            public_status = True
-            new_file = models.File(
-                nama_file = nama_file,
-                nama_folder = nama_folder,
-                file_attachment = file_attachment,
-                public_status = public_status,
-            )
-            new_file.save()
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
+    template_name = "AddFile.html"
+    model = models.File
+    form_class = form_class = forms.FormAddFileBukuPanduan
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'AddFile.html', context)
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
-def UpdateFileBukuPanduan(request, id): 
-    folderinfoumum = pkjuduldef()
-    data = models.Folder.objects.get(id=folderinfoumum)
-    nama_folder = data.nama_folder
+class DeleteFileonFolder(DeleteView):
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'nama_folder':pk,
+        }
+    
+    template_name = "DeleteConfirmation.html"
+    model = models.File
 
-    context ={} 
-  
-    if nama_folder == 'Buku Panduan':
-        obj = get_object_or_404(models.File, id = id) 
-        form = forms.FormAddFileBukuPanduan(request.POST or None, instance = obj) 
-        if request.method == 'POST':
-            post = request.POST
-            obj.nama_file = post['nama_file']
-            nama_folder = models.Folder.objects.get(nama_folder = 'Buku Panduan')
-            obj.file_attachment = post['file_attachment']
-            public_status = True
-            obj.save()
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
-    elif nama_folder =='Peraturan-Peraturan':
-        obj = get_object_or_404(models.File, id = id) 
-        form = forms.FormAddFilePeraturan(request.POST or None, instance = obj) 
-        if form.is_valid(): 
-            form.save() 
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+    
+class AddSubFolder01(CreateView):
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'parent_folder':pk,
+        }
 
-    context["form"] = form 
-  
-    return render(request, "AddFile.html", context)
+    template_name = "AddSubFolder1.html"
+    form_class = forms.FormAddSubFolder1
 
-def DeleteFileBukuPanduan(request, id): 
-    folderinfoumum = pkjuduldef()
-    data = models.Folder.objects.get(id=folderinfoumum)
-    nama_folder = data.nama_folder
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
-    context ={} 
+class UpdateSubFolder01(UpdateView):
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'parent_folder':pk,
+        }
 
-    if nama_folder == 'Buku Panduan':
-        obj = get_object_or_404(models.File, id = id) 
-        if request.method =="POST": 
-            obj.delete() 
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
-    elif nama_folder == 'Peraturan-Peraturan':
-        obj = get_object_or_404(models.File, id = id) 
-        if request.method =="POST": 
-            obj.delete() 
-            return redirect('sub_informasi_umum', pk=folderinfoumum)
-    return render(request, "DeleteConfirmation.html", context) 
+    template_name = "AddFile.html"
+    model = models.SubFolder01
+    form_class = forms.FormAddSubFolder1
 
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
-def AddFilePeraturan(request):
+class DeleteSubFolder01(DeleteView):
+    def get_initial(self):
+        pk = pkjuduldef()
+        return {
+            'nama_folder':pk,
+        }
+    
+    template_name = "DeleteConfirmation.html"
+    model = models.SubFolder01
 
-    form = forms.FormAddFilePeraturan()
-    context = {
-        'form': form,
-    }
-
-    if request.method == 'POST':
-            post = request.POST
-            nama_file = post['nama_file']
-            nama_folder = models.Folder.objects.get(nama_folder = 'Peraturan-Peraturan')
-            file_attachment = post['file_attachment']
-            public_status = True
-            new_file = models.File(
-                nama_file = nama_file,
-                nama_folder = nama_folder,
-                file_attachment = file_attachment,
-                public_status = public_status,
-            )
-            new_file.save()
-            return redirect('Buku_Panduan')
-
-    return render(request, 'AddFile.html', context)
-
-def UpdateFilePeraturan(request, id): 
-
-    obj = get_object_or_404(models.File, id = id) 
-  
-
-    form = forms.FormAddFilePeraturan(request.POST or None, instance = obj) 
-    context = {
-        'form': form,
-    }
-  
-    if form.is_valid(): 
-        form.save() 
-        return redirect('Buku_Panduan') 
-  
-  
-    return render(request, "AddFile.html", context)
-
-def DeleteFilePeraturan(request, id): 
-    context ={} 
-  
-    obj = get_object_or_404(models.File, id = id) 
-  
-  
-    if request.method =="POST": 
-        obj.delete() 
-        return redirect('Buku_Panduan')
-  
-    return render(request, "DeleteConfirmation.html", context) 
-
+    def get_success_url(self):
+        tes=pkjuduldef()
+        print(tes)
+        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+    
 def AMIUmum(request):
     files = models.File.objects.filter(nama_folder__nama_folder='AMI Umum')
 
@@ -319,3 +249,4 @@ def SubFolderABPTUmum(request, pk):
     return render(request, 'BANPT/SubBANPT.html', context)
 def pkjudulabptumumdef():
     return pkjudulabptumum
+
