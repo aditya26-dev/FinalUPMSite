@@ -227,6 +227,7 @@ text-decoration: none;
   .page-title {
   margin-top: 2rem;
   margin-left: 17.5rem;
+  margin-right: 4rem;
   }
   .box-inside {
   background: #FFFFFF;
@@ -262,6 +263,7 @@ text-decoration: none;
   .page-title {
       margin-top: 2rem;
       margin-left: 1.5rem;
+      margin-right: 2rem;
   }
   .folder-card {
       margin-left: 1.5rem;
@@ -279,4 +281,10 @@ text-decoration: none;
 
 .right-menu {
   display: flex;
+}
+
+.list-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

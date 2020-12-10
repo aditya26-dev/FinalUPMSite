@@ -1,8 +1,8 @@
 $(document).ready(function() {
     $("#searchbox").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $('div[data-role="card-menus"]').filter(function() {
-            $(this).toggle($(this).find('h5').text().toLowerCase().indexOf(value) > -1)
+        $('div[data-role="list-menus"]').filter(function() {
+            $(this).toggle($(this).find('a').text().toLowerCase().indexOf(value) > -1)
         });
     });
 });
