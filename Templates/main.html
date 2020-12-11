@@ -53,6 +53,7 @@
                 <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ami_umum' %}">
                   Umum
                 </a>
+                {% if roles == 'Admin' %}
                 <div class="accordion navigation_menu" id="accordionExampleTwo">
                   <div class="card-head card1-2" id="headingFour">
                     <h2 class="mb-0">
@@ -68,7 +69,6 @@
                       </button>
                     </h2>
                   </div>
-                  {% if roles == 'Admin' %}
                   <div id="collapseFour" class="collapse buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
                     {% for prodi in semua_prodi %}
                     <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
@@ -77,13 +77,11 @@
                     {% endfor %}
                   </div>
                   {% endif %}
-                  {% if roles == 'Faculty Member' %}
-                  <div id="collapseFour" class="collapse buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      {{prodi}}
-                    </a>
-                  </div>
-                  {% endif %}
+                {% if roles == 'Faculty Member' %}
+                  <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                    {{prodi}}
+                  </a>
+                {% endif %}
                 </div>
               </div>
             </div>
@@ -107,6 +105,7 @@
                 <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ABPT_Umum' %}">
                   Umum
                 </a>
+                {% if roles == 'Admin' %}
                 <div class="accordion navigation_menu" id="accordionExampleThree">
                   <div class="card-head card1-2" id="headingFive">
                     <h2 class="mb-0">
@@ -123,25 +122,18 @@
                     </h2>
                   </div>
                   <div id="collapseFive" class="collapse buttonTest2" aria-labelledby="headingFive" data-parent="#accordionExampleThree">
+                    {% for prodi in semua_prodi %}
                     <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Business Mathematics
+                      {{prodi.nama_prodi}}
                     </a>
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Food Business Technology
-                    </a>
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Renewable Energy Engineering
-                    </a>
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Computer System Engineering
-                    </a>
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Software Engineering
-                    </a>
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
-                      Product Design Engineering
-                    </a>
+                    {% endfor %}
                   </div>
+                  {% endif %}
+                  {% if roles == 'Faculty Member' %}
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
+                      {{prodi}}
+                    </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -170,9 +162,10 @@
                   Hello, {{user.first_name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'pengaturan_Akun' %}">Pengaturan profil</a>
-                  <a class="dropdown-item" href="#">Informasi penting</a>
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="{% url 'pengaturan_Akun' %}">Edit Profil</a>
+                  {% if roles == 'Admin' %}
+                    <a class="dropdown-item" href="{% url 'akun' %}">List Account</a>
+                  {% endif %}
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Log out</a>
                 </div>

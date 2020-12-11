@@ -15,6 +15,7 @@ urlpatterns = [
 
     path('login/',views_account.loginPage, name="login"),
     path('logout/', views_account.logoutUser, name="logout"),
+    path('register/', views_account.daftarakun, name="register"),
     path('akun/', akun.as_view(), name='akun'),
     path('settinguser/', views_upmsite.pengaturanakun, name="pengaturan_Akun"),
 
@@ -63,6 +64,7 @@ urlpatterns = [
     path('updatefile_subfile02/<int:pk>', views_upmsite.UpdateFileonFolder2.as_view(), name="UpdateSubFile_02"),
     path('deletefile_subfile02/<int:pk>', views_upmsite.DeleteFileonFolder2.as_view(), name="DeleteSubFile_02"),
 
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
