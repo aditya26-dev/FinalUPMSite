@@ -76,7 +76,8 @@ urlpatterns = [
 
     path('subfolder1/<int:pk_parent>/', viewscinta.SubFolder1List, name="subfolder1-list"),
     path('subfolder1/create/<int:pk_parent>/', viewscinta.SubFolder1Create.as_view(), name="subfolder1-create"),
-    # path('subfolder01/create/<int:pk_folder>', viewscinta.AddSubFolder01.as_view(), name="subfolder01-create-handler"),
+
+    path('subfolder2/<int:pk_parent>/', viewscinta.SubFolder2List, name="subfolder2-list"),
 
 
     
