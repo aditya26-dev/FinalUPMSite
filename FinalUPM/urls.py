@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('amiprodi/<int:pk>', views_upmsite.AMIProdi, name='semua_prodi'),
 
+    path('fileamiprodi/<int:pk>', views_upmsite.SubFileAmiProdi, name='ami_prodi_file'),
+
+    path('addsubfolderamiprodi/<int:pk>', views_upmsite.AddSubFolderAMIProdi01.as_view(), name="addsubfolder_amiprodi"),
+
     #upm site 
     path('home/', views_upmsite.home, name="home"),
 

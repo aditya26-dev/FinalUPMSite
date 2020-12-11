@@ -154,6 +154,7 @@ def AMIUmum(request):
     }
     return render(request, 'AMIUmum.html', context)
 
+pkprodi = 0
 def AMIProdi(request, pk):
     roles = request.user.roles
     prodi = request.user.prodi
@@ -162,13 +163,16 @@ def AMIProdi(request, pk):
     semua_prodi_nama = models_account.ProgramStudi.objects.get(id = pk)
 
     semua_folder = models.SubFolder01.objects.filter(parent_folder__nama_folder = 'AMI Prodi', parent_folder__nama_prodi__id = pk)
-    print(semua_folder)
 
+    folder = models.Folder.objects.get(nama_prodi__id = pk)
 
-    folder = models.SubFolder01.objects.filter(parent_folder__nama_folder = 'AMI Prodi')
+    # global pkprodi
+    # pkprodi = folder.id
+
+    global pkprodi
+    pkprodi = pk
 
     context = {
-        'folder': folder,
         'roles': roles,
         'prodi': prodi,
         'semua_prodi': semua_prodi,
@@ -177,6 +181,13 @@ def AMIProdi(request, pk):
         'pk': pk,
     }
     return render(request, 'AMIProdi.html', context)
+def datapkprodi():
+    return pkprodi
+
+def SubFileAmiProdi(request, pk):
+
+    
+    return render(request, 'SubFileAmiProdi.html', context)
 
 def ABPTProdi(request):
     context = {
@@ -247,20 +258,22 @@ class AddSubFolder01(CreateView):
         print(tes)
         return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
 
-class AddSubFolder01AMIProdi(CreateView):
+class AddSubFolderAMIProdi01(CreateView):
     def get_initial(self):
-        pk = pkjuduldef()
+        pk = datapkprodi()
+        folder = models.Folder.objects.get(nama_prodi__id = pk)
+        print(pk)
         return {
-            'parent_folder':pk,
+            'parent_folder': folder.id,
         }
 
     template_name = "AddSubFolder1.html"
     form_class = forms.FormAddSubFolder1
 
     def get_success_url(self):
-        tes=pkjuduldef()
+        tes=datapkprodi()
         print(tes)
-        return reverse_lazy('sub_informasi_umum', kwargs={'pk': tes})
+        return reverse_lazy('semua_prodi', kwargs={'pk': tes})
 
 class UpdateSubFolder01(UpdateView):
     def get_initial(self):
@@ -426,6 +439,4 @@ def SubFolderABPTUmum(request, pk):
     return render(request, 'BANPT/SubBANPT.html', context)
 def pkjudulabptumumdef():
     return pkjudulabptumum
-
-
 
