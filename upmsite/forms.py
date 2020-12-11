@@ -29,6 +29,10 @@ class FormAddSubFolder1(ModelForm):
     class Meta:
         model = SubFolder01
         fields = '__all__'
+        widgets = {
+            'nama_folder' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Tulis nama Folder di sini ...'}),
+            'parent_folder' : forms.Select(attrs={'class': 'form-control'}),
+        }
 
 class FormAddSubFolder2(ModelForm):
     class Meta:
