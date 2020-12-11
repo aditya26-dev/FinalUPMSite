@@ -24,13 +24,17 @@
   <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
     <div class="list-group">
       {%for item in informasiUmum%}
-        
-        <a type="button" class="list-group-item list-group-item-action button" href="{% url 'sub_informasi_umum' item.id %}">
-          {{item.nama_folder}}
-        </a>
+        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'sub_informasi_umum' item.id %}';">
+          <a href="" class="text-decoration-none text-reset">{{item.nama_folder}}</a>
+          <div>
+              <a href="#" class="btn btn-warning btn-card-menu">Edit</a>
+              <a href="#" class="btn btn-danger btn-card-menu">Delete</a>
+          </div>
+        </div>
       {%endfor%}
     </div>
   </section>
+  
 
 {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

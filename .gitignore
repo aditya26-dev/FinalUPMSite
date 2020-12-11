@@ -8,7 +8,10 @@
 env/
 db.sqlite3
 
-_pycache_/
+__pycache__/
+Accounts/__pycache__/*
+upmsite/__pycache__/*
+FinalUPM/__pycache__/*
 
 Accounts/migrations/*
 !Accounts/migrations/_init_.py
