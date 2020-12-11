@@ -31,14 +31,14 @@ def FolderList(request, kategori, pk_prodi):
     }
     return render(request, 'Akreditasi/FolderList.html', context)
 
-def SubFolder1List(request, pk):
+def SubFolder1List(request, pk_parent):
     roles = request.user.roles
     prodi = request.user.prodi
     semua_prodi = models_account.ProgramStudi.objects.all()
 
-    subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk)
-    files = models.File.objects.filter(nama_folder__id = pk)
-    folder = models.Folder.objects.get(id = pk)
+    subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
+    files = models.File.objects.filter(nama_folder__id = pk_parent)
+    folder = models.Folder.objects.get(id = pk_parent)
     kategori = folder.kategori
 
 
@@ -50,7 +50,7 @@ def SubFolder1List(request, pk):
         'files': files,
         'subfolder1': subfolder1,
         'judul': folder,
-        'pk': pk,
+        'pk': pk_parent,
     }
     return render(request, 'Akreditasi/SubFolder1List.html', context)
 
@@ -78,5 +78,27 @@ class FolderCreate(CreateView):
         pk = self.kwargs.get('pk_prodi')
         prodi_name = models_account.ProgramStudi.objects.get(id=pk)
         context["prodi_name"] = prodi_name.nama_prodi
+        return context
 
+class SubFolder1Create(CreateView):
+    def get_initial(self):
+        pk = self.kwargs.get('pk_parent')
+        parent_folder = models.Folder.objects.get(id=pk)
+
+        return {
+            'parent_folder': parent_folder,
+        }
+
+    template_name = "Akreditasi/FolderAdd.html"
+    form_class = forms.FormAddSubFolder1
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk_parent')
+        return reverse_lazy('subfolder1-list', kwargs={'pk_parent': pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk_parent')
+        folder = models.Folder.objects.get(id=pk)
+        context["prodi_name"] = folder.nama_folder
         return context

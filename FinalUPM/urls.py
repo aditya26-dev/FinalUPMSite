@@ -74,7 +74,8 @@ urlpatterns = [
     path('folder/<str:kategori>/<int:pk_prodi>', viewscinta.FolderList, name="folder-list"),
     path('folder/create/<str:kategori>/<int:pk_prodi>', viewscinta.FolderCreate.as_view(), name="folder-create"),
 
-    path('subfolder1/<int:pk>/', viewscinta.SubFolder1List, name="subfolder1-list"),
+    path('subfolder1/<int:pk_parent>/', viewscinta.SubFolder1List, name="subfolder1-list"),
+    path('subfolder1/create/<int:pk_parent>/', viewscinta.SubFolder1Create.as_view(), name="subfolder1-create"),
     # path('subfolder01/create/<int:pk_folder>', viewscinta.AddSubFolder01.as_view(), name="subfolder01-create-handler"),
 
 
