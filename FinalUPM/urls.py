@@ -71,7 +71,11 @@ urlpatterns = [
     path('deletefile_subfile02/<int:pk>', views_upmsite.DeleteFileonFolder2.as_view(), name="DeleteSubFile_02"),
 
     #new handler by mata
-    path('folder/<str:kategori>/<int:pk_prodi>', viewscinta.FolderHandler, name="folder-handler"),
+    path('folder/<str:kategori>/<int:pk_prodi>', viewscinta.FolderList, name="folder-list"),
+    path('folder/create/<str:kategori>/<int:pk_prodi>', viewscinta.FolderCreate.as_view(), name="folder-create"),
+
+
+    # path('subfolder01/create/<int:pk_folder>', viewscinta.AddSubFolder01.as_view(), name="subfolder01-create-handler"),
 
 
     

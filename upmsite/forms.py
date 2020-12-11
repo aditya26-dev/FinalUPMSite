@@ -14,6 +14,17 @@ class FormAddFileBukuPanduan(ModelForm):
             'public_status' : forms.CheckboxInput()
         }
 
+class FormAddFolder(ModelForm):
+    class Meta:
+        model = Folder
+        fields = '__all__'
+        widgets = {
+            'nama_folder' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Tulis nama Folder di sini ...'}),
+            'nama_prodi' : forms.Select(attrs={'class': 'form-control'}),
+            'kategori' : forms.Select(attrs={'class': 'form-control'}),
+            'public_status' : forms.CheckboxInput()
+        }
+
 class FormAddSubFolder1(ModelForm):
     class Meta:
         model = SubFolder01
