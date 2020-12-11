@@ -15,12 +15,14 @@ class CreationUserForm(UserCreationForm):
         super(CreationUserForm, self).__init__(*args, **kwargs)
 
         self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
     class Meta(UserCreationForm):
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'prodi', 'roles')
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'prodi', 'roles')
         widgets = {
             'username' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'username'}),
             'email' : forms.EmailInput(attrs={'class': 'form-control', 'placeholder' : 'email'}),
