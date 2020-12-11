@@ -53,4 +53,8 @@ class FolderCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk_prodi')
+        prodi_name = models_account.ProgramStudi.objects.get(id=pk)
+        context["prodi_name"] = prodi_name.nama_prodi
+
         return context
