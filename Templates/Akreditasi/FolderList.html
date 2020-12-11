@@ -24,7 +24,7 @@
   <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
     <div class="list-group">
       {%for item in informasiUmum%}
-        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'sub_informasi_umum' item.id %}';">
+        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder1-list' item.id %}';">
           <a href="" class="text-decoration-none text-reset">{{item.nama_folder}}</a>
           <div>
               <a href="#" class="btn btn-warning btn-card-menu">Edit</a>

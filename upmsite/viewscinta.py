@@ -31,6 +31,28 @@ def FolderList(request, kategori, pk_prodi):
     }
     return render(request, 'Akreditasi/FolderList.html', context)
 
+def SubFolder1List(request, pk):
+    roles = request.user.roles
+    prodi = request.user.prodi
+    semua_prodi = models_account.ProgramStudi.objects.all()
+
+    subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk)
+    files = models.File.objects.filter(nama_folder__id = pk)
+    folder = models.Folder.objects.get(id = pk)
+    kategori = folder.kategori
+
+
+    context = {
+        'kategori': kategori,
+        'roles': roles,
+        'prodi': prodi,
+        'semua_prodi': semua_prodi,
+        'files': files,
+        'subfolder1': subfolder1,
+        'judul': folder,
+        'pk': pk,
+    }
+    return render(request, 'Akreditasi/SubFolder1List.html', context)
 
 class FolderCreate(CreateView):
     def get_initial(self):
