@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from Accounts import views as views_account
 from upmsite import views as views_upmsite
 from Accounts.views import akun
+from upmsite import viewscinta
 
 
 urlpatterns = [
@@ -68,6 +69,10 @@ urlpatterns = [
     path('addfile_subfile02/<int:pk>', views_upmsite.FileonFolderCreate2.as_view(), name="AddSubFile_02"),
     path('updatefile_subfile02/<int:pk>', views_upmsite.UpdateFileonFolder2.as_view(), name="UpdateSubFile_02"),
     path('deletefile_subfile02/<int:pk>', views_upmsite.DeleteFileonFolder2.as_view(), name="DeleteSubFile_02"),
+
+    #new handler by mata
+    path('folder/<str:kategori>/<int:pk_prodi>', viewscinta.FolderHandler, name="folder-handler"),
+
 
     
 ]
