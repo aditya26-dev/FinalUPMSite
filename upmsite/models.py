@@ -14,9 +14,11 @@ class Folder(models.Model):
     nama_prodi = models.ForeignKey(ProgramStudi, on_delete=models.CASCADE, blank = True, null = True)
     kategori = models.CharField(max_length=50, choices=listKategori)
     public_status = models.BooleanField(default = True)
+    isAllowNewFolder = models.BooleanField(default = True)
+    isAllowNewFile = models.BooleanField(default = True)
 
     def __str__(self):
-        return '{}'.format(self.nama_folder)
+        return '{} ({})'.format(self.nama_folder, self.nama_prodi)
 
 class File(models.Model):
 

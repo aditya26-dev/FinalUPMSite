@@ -29,31 +29,17 @@
   </section>
 
 
-
-  <section class="folder-card">
-    <div class="box-inside">
-    <div class="row">
+  <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
+    <div class="list-group">
       {% for itemfolder in subfolder2 %}
-      <div class="col-sm-6" data-role="card-menus">
-        <div class="card card3">
-          <img src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" class="card-img-top card3-img" alt="">
-          <div class="card-body">
-            <div class="card-inside">
-                <div class="card-text-inside">
-                    <h5 class="card-title">{{itemfolder.nama_folder}}</h5>
-                    <p class="card-text">Ini subtitle</p>
-                </div>
-                <div>
-                    <a href="{% url 'sub_file_informasi_umum1' itemfolder.id %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
-                    <a href="{% url 'UpdateSubFolder_02' pk=itemfolder.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
-                    <a href="{% url 'DeleteSubFolder_02' pk=itemfolder.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
-                </div>
-            </div>
+        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'sub_file_informasi_umum1' itemfolder.id %}';">
+          <a href="" class="text-decoration-none text-reset">{{itemfolder.nama_folder}}</a>
+          <div>
+              <a href="{% url 'UpdateSubFolder_02' pk=itemfolder.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+              <a href="{% url 'DeleteSubFolder_02' pk=itemfolder.id %}" class="btn btn-danger btn-card-menu">Delete</a>
           </div>
         </div>
-      </div>
-      {% endfor %}
-    </div>
+      {%endfor%}
     </div>
   </section>
 

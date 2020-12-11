@@ -71,7 +71,7 @@
                   {% if roles == 'Admin' %}
                   <div id="collapseFour" class="collapse buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
                     {% for prodi in semua_prodi %}
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="https://www.google.com">
+                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="{% url 'semua_prodi' pk=prodi.id %}">
                       {{prodi.nama_prodi}}
                     </a>
                     {% endfor %}
