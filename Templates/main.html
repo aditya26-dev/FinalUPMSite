@@ -173,7 +173,11 @@
             </ul>
             <div id="container">
               <div class="avatar">
-                <img src="{{request.user.profile_picture.url}}" alt="">
+                {% if request.user.profile_image %}
+                  <img src="{{request.user.profile_picture.url}}" alt="">
+                {% else %}
+                  <img src="{% static 'media/user.png' %}" alt="">
+                {% endif %}
               </div>
             </div>
           </div>  
