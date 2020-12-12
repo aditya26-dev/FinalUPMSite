@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 # from django.contrib.auth.models import User
 from .decorators import unauthenticated_user
-from .forms import CreationUserForm
+from .forms import CreationUserForm, CustomUserChangeForm
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
@@ -46,6 +46,21 @@ def daftarakun(request):
     context = {'form' : form}
 
     return render(request, 'Account/Register.html', context)
+
+def editakun(request):
+    user = request.user
+
+    form = CustomUserChangeForm(instance=user)
+
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("Informasi_Umum")
+
+    context = {'form' : form}
+
+    return render(request, 'Account/Edit_Akun.html', context)
     
 class akun(ListView):
     model = get_user_model()

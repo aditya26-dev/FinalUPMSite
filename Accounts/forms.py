@@ -35,9 +35,22 @@ class CreationUserForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 
-    class Meta:
+    def __init__(self, *args, **kwargs):
+        super(CustomUserChangeForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+        self.fields['password'].widget.attrs['class'] = 'form-control'
+
+    class Meta(UserChangeForm):
         model = User
-        fields = ('email',)
+        fields = ('username', 'email', 'first_name', 'last_name', 'profile_picture')
+        widgets = {
+            'username' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'username'}),
+            'email' : forms.EmailInput(attrs={'class': 'form-control', 'placeholder' : 'email'}),
+            'profile_picture' : forms.FileInput(),
+        }
 
 # class CreationUserForm(ModelForm):
 #     class Meta:

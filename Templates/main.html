@@ -162,7 +162,7 @@
                   Hello, {{user.first_name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'pengaturan_Akun' %}">Edit Profil</a>
+                  <a class="dropdown-item" href="{% url 'editprofile' %}">Edit Profil</a>
                   {% if roles == 'Admin' %}
                     <a class="dropdown-item" href="{% url 'akun' %}">List Account</a>
                   {% endif %}
@@ -173,7 +173,7 @@
             </ul>
             <div id="container">
               <div class="avatar">
-                {% if request.user.profile_image %}
+                {% if request.user.profile_picture %}
                   <img src="{{request.user.profile_picture.url}}" alt="">
                 {% else %}
                   <img src="{% static 'media/user.png' %}" alt="">
