@@ -37,8 +37,7 @@ def InformasiUmum(request):
     roles = request.user.roles
     prodi = request.user.prodi
     semua_prodi = models_account.ProgramStudi.objects.all()
-
-
+    
 
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
     context = {

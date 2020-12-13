@@ -21,13 +21,13 @@ urlpatterns = [
     path('editprofile/', views_account.editakun, name="editprofile"),
 
     #ami umum
-    path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
+    # path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
 
-    path('amiprodi/<int:pk>', views_upmsite.AMIProdi, name='semua_prodi'),
+    # path('amiprodi/<int:pk>', views_upmsite.AMIProdi, name='semua_prodi'),
 
-    path('fileamiprodi/<int:pk>', views_upmsite.SubFileAmiProdi, name='ami_prodi_file'),
+    # path('fileamiprodi/<int:pk>', views_upmsite.SubFileAmiProdi, name='ami_prodi_file'),
 
-    path('addsubfolderamiprodi/<int:pk>', views_upmsite.AddSubFolderAMIProdi01.as_view(), name="addsubfolder_amiprodi"),
+    # path('addsubfolderamiprodi/<int:pk>', views_upmsite.AddSubFolderAMIProdi01.as_view(), name="addsubfolder_amiprodi"),
 
     #upm site 
     path('home/', views_upmsite.home, name="home"),
@@ -71,13 +71,41 @@ urlpatterns = [
     path('deletefile_subfile02/<int:pk>', views_upmsite.DeleteFileonFolder2.as_view(), name="DeleteSubFile_02"),
 
     #new handler by mata
+    # folder
     path('folder/<str:kategori>/<int:pk_prodi>', viewscinta.FolderList, name="folder-list"),
     path('folder/create/<str:kategori>/<int:pk_prodi>', viewscinta.FolderCreate.as_view(), name="folder-create"),
+    path('folder/update/<str:kategori>/<int:pk_prodi>', viewscinta.FolderUpdate.as_view(), name="folder-update"),
+    path('folder/delete/<str:kategori>/<int:pk_prodi>', viewscinta.FolderDelete.as_view(), name="folder-delete"),
 
+    # file
+    path('file/create/<int:pk_parent>', viewscinta.FileCreate.as_view(), name="file-create"),
+    path('file/update/<int:pk_parent>', viewscinta.FileUpdate.as_view(), name="file-update"),
+    path('file/delete/<int:pk_parent>', viewscinta.FileDelete.as_view(), name="file-delete"),
+
+    # sub folder 1
     path('subfolder1/<int:pk_parent>/', viewscinta.SubFolder1List, name="subfolder1-list"),
     path('subfolder1/create/<int:pk_parent>/', viewscinta.SubFolder1Create.as_view(), name="subfolder1-create"),
+    path('subfolder1/update/<int:pk_parent>/', viewscinta.SubFolder1Update.as_view(), name="subfolder1-update"),
+    path('subfolder1/delete/<int:pk_parent>/', viewscinta.SubFolder1Delete.as_view(), name="subfolder1-delete"),
 
+    # sub file 1
+    path('subfile1/create/<int:pk_parent>/', viewscinta.SubFile1Create.as_view(), name="subfile1-create"),
+    path('subfile1/update/<int:pk_parent>/', viewscinta.SubFile1Update.as_view(), name="subfile1-update"),
+    path('subfile1/delete/<int:pk_parent>/', viewscinta.SubFile1Delete.as_view(), name="subfile1-delete"),
+
+    # subfolder 2
     path('subfolder2/<int:pk_parent>/', viewscinta.SubFolder2List, name="subfolder2-list"),
+    path('subfolder2/create/<int:pk_parent>/', viewscinta.SubFolder2Create.as_view(), name="subfolder2-create"),
+    path('subfolder2/update/<int:pk_parent>/', viewscinta.SubFolder2Update.as_view(), name="subfolder2-update"),
+    path('subfolder2/delete/<int:pk_parent>/', viewscinta.SubFolder2Delete.as_view(), name="subfolder2-delete"),
+
+    # sub file 2
+    path('subfile2/<int:pk_parent>/', viewscinta.SubFile2List, name="subfile2-list"),
+    path('subfile2/create/<int:pk_parent>', viewscinta.SubFile2Create.as_view(), name="subfile2-create"),
+    path('subfile2/update/<int:pk_parent>', viewscinta.SubFile2Update.as_view(), name="subfile2-update"),
+    path('subfile2/delete/<int:pk_parent>', viewscinta.SubFile2Delete.as_view(), name="subfile2-delete"),
+
+    
 
 
     

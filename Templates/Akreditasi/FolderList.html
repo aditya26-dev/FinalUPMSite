@@ -1,16 +1,17 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 
 <section>
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">{{label}} / {{prodi}}</a></li>
+        <li class="breadcrumb-item"><a href="#">{{label}} {{prodi}}</a></li>
       </ol>
   </nav>
 </section>
 
   <section class="page-title" style="margin-left: 17.9rem; ">
-      <h3 class="font-weight-bold">{{label}}</h3>
+    <h3 class="font-weight-bold">{{label}} {{prodi}}</h3>
       <p class="font-weight-light">Universitas Prasetiya Mulya</p>
       <a class="btn btn-primary" href="{% url 'folder-create' kategori=kategori pk_prodi=pk_prodi %}">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -24,11 +25,11 @@
   <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
     <div class="list-group">
       {%for item in informasiUmum%}
-        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder1-list' item.id %}';">
+        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder1-list' pk_parent=item.id %}';">
           <a href="" class="text-decoration-none text-reset">{{item.nama_folder}}</a>
           <div>
-              <a href="#" class="btn btn-warning btn-card-menu">Edit</a>
-              <a href="#" class="btn btn-danger btn-card-menu">Delete</a>
+            <a href="{% url 'folder-update' kategori=kategori pk_prodi=item.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+            <a href="{% url 'folder-delete' kategori=kategori pk_prodi=item.id %}" class="btn btn-danger btn-card-menu">Delete</a>
           </div>
         </div>
       {%endfor%}

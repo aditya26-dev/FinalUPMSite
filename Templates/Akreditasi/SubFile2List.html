@@ -5,8 +5,11 @@
 <section>
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}} {{judul.nama_prodi}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}} {{judul.parent_folder.parent_folder.nama_prodi}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'subfolder1-list' pk_parent=link2 %}">{{linksubfolder1.nama_folder}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'subfolder2-list' pk_parent=link3 %}">{{linksubfolder2.nama_folder}}</a></li>        
         <li class="breadcrumb-item active" aria-current="page" href="">{{judul.nama_folder}}</li>
+        
         
       </ol>
   </nav>
@@ -16,29 +19,17 @@
       <h3 class="font-weight-bold">{{judul.nama_folder}}</h3>
       <p class="font-weight-light">Universitas Prasetiya Mulya</p>
 
-      {%if judul.isAllowNewFile == True %}
-      <a class="btn btn-primary" href="{% url 'file-create' pk_parent %}">
+      <a class="btn btn-primary" href="{% url 'subfile2-create' pk_parent %}">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
           </svg>
           Add new file
       </a>
-      {% endif %}
-
-      {%if judul.isAllowNewFolder == True %}
-      <a class="btn btn-primary" href="{% url 'subfolder1-create' pk_parent %}">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-        Add new folder
-      </a>
-      {% endif %}
   </section>
 
 
-
+      
   <section class="folder-card">
     <div class="box-inside">
     <div class="row">
@@ -53,8 +44,8 @@
                 </div>
                 <div>
                     <a href="{% static item.file_attachment.url %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
-                    <a href="{% url 'file-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
-                    <a href="{% url 'file-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
+                    <a href="{% url 'subfile2-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'subfile2-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
                 </div>
             </div>
           </div>
@@ -62,20 +53,6 @@
       </div>
       {% endfor %}
     </div>
-    </div>
-  </section>
-
-  <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
-    <div class="list-group">
-      {% for itemfolder in subfolder1 %}
-        <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder2-list' itemfolder.id %}';">
-          <a href="" class="text-decoration-none text-reset">{{itemfolder.nama_folder}}</a>
-          <div>
-              <a href="{% url 'subfolder1-update' pk_parent=itemfolder.id %}" class="btn btn-warning btn-card-menu">Edit</a>
-              <a href="{% url 'subfolder1-delete' pk_parent=itemfolder.id %}" class="btn btn-danger btn-card-menu">Delete</a>
-          </div>
-        </div>
-      {%endfor%}
     </div>
   </section>
 
