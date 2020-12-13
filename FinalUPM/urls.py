@@ -105,10 +105,6 @@ urlpatterns = [
     path('subfile2/update/<int:pk_parent>', viewscinta.SubFile2Update.as_view(), name="subfile2-update"),
     path('subfile2/delete/<int:pk_parent>', viewscinta.SubFile2Delete.as_view(), name="subfile2-delete"),
 
-    
-
-
-    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

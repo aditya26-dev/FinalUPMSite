@@ -77,11 +77,13 @@
                     {% endfor %}
                   </div>
                   {% endif %}
-                {% if roles == 'Faculty Member' %}
-                  <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
-                    {{prodi}}
-                  </a>
-                {% endif %}
+                  {% if roles == 'Faculty Member' %}
+                  {% for item in prodi_terpilih %}
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=item.id %}">
+                      {{item.nama_prodi}}
+                    </a>
+                  {% endfor %}
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -130,9 +132,11 @@
                   </div>
                   {% endif %}
                   {% if roles == 'Faculty Member' %}
-                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="#">
-                      {{prodi}}
+                  {% for item in prodi_terpilih %}
+                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'folder-list' kategori='ABPT' pk_prodi=item.id %}">
+                      {{item.nama_prodi}}
                     </a>
+                  {% endfor %}
                   {% endif %}
                 </div>
               </div>

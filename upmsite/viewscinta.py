@@ -13,7 +13,7 @@ def FolderList(request, kategori, pk_prodi):
     informasiUmum = models.Folder.objects.filter(kategori=kategori, nama_prodi__id=pk_prodi)
     selected_prodi = models_account.ProgramStudi.objects.get(id=pk_prodi)
 
-    global data_pk_prodi, data_bagian
+    global data_pk_prodi
     data_pk_prodi = pk_prodi
 
     label = kategori

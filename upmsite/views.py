@@ -16,6 +16,7 @@ def pengaturanakun(request):
 
 #------ Informasi Umum-------
 
+
 def BukuPanduan(request):
     bukuPanduan = models.File.objects.filter(nama_folder='1')
     print(bukuPanduan)
@@ -37,6 +38,8 @@ def InformasiUmum(request):
     roles = request.user.roles
     prodi = request.user.prodi
     semua_prodi = models_account.ProgramStudi.objects.all()
+
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
     
 
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
@@ -45,6 +48,7 @@ def InformasiUmum(request):
         'roles': roles,
         'prodi': prodi,
         'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
     }
     return render(request, 'InformasiUmum/InformasiUmum.html', context)
 
