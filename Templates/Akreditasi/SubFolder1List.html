@@ -7,7 +7,6 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}} {{judul.nama_prodi}}</a></li>
         <li class="breadcrumb-item active" aria-current="page" href="">{{judul.nama_folder}}</li>
-        
       </ol>
   </nav>
 </section>
@@ -15,35 +14,61 @@
   <section class="page-title" style="margin-left: 17.9rem; ">
       <h3 class="font-weight-bold">{{judul.nama_folder}}</h3>
       <p class="font-weight-light">Universitas Prasetiya Mulya</p>
-      {% if roles == 'Admin' %}
-        {%if judul.isAllowNewFile == True %}
-        <a class="btn btn-primary" href="{% url 'file-create' pk_parent %}">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg>
-            Add new file
-        </a>
-        {% endif %}
-      
 
-        {%if judul.isAllowNewFolder == True %}
-        <a class="btn btn-primary" href="{% url 'subfolder1-create' pk_parent %}">
+      {%if kategori == 'AMI' %}
+      <a class="btn btn-primary" href="{% url 'file-create' pk_parent %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Add new file
+      </a>
+
+      {%elif kategori == 'ABPT' %}
+      <a class="btn btn-primary" href="{% url 'file-create' pk_parent %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Add new file
+      </a>
+
+      <a class="btn btn-primary" href="{% url 'subfolder1-create' pk_parent %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Add new folder
+      </a>
+
+      {% else %}
+      {%if judul.isAllowNewFile == True %}
+      <a class="btn btn-primary" href="{% url 'file-create' pk_parent %}">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
           </svg>
-          Add new folder
-        </a>
-        {% endif %}
+          Add new file
+      </a>
+      {% endif %}
+
+      {%if judul.isAllowNewFolder == True %}
+      <a class="btn btn-primary" href="{% url 'subfolder1-create' pk_parent %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Add new folder
+      </a>
+      {% endif %}
       {% endif %}
   </section>
-
 
 
   <section class="folder-card">
     <div class="box-inside">
     <div class="row">
+      {% if kategori == 'AMI' %}
       {% for item in files %}
       <div class="col-sm-6" data-role="card-menus">
         <div class="card card3">
@@ -55,16 +80,74 @@
                 </div>
                 <div>
                     <a href="{% static item.file_attachment.url %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
-                    {% if roles == 'Admin' %}
-                      <a href="{% url 'file-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
-                      <a href="{% url 'file-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
-                    {% endif %}
+                    <a href="{% url 'file-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'file-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
                 </div>
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
+
+      {%elif kategori == 'ABPT' %}
+      {% for item in files %}
+      <div class="col-sm-6" data-role="card-menus">
+        <div class="card card3">
+          <div class="card-body">
+            <div class="card-inside">
+                <div class="card-text-inside">
+                    <h5 class="card-title">{{item.nama_file}}</h5>
+                    <p class="card-text">Ini subtitle</p>
+                </div>
+                <div>
+                    <a href="{% static item.file_attachment.url %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
+                    <a href="{% url 'file-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'file-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </section>
+
+      <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
+        <div class="list-group">
+          {% for itemfolder in folder %}
+            <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder2-list' itemfolder.id %}';">
+              <a href="" class="text-decoration-none text-reset">{{itemfolder.nama_folder}}</a>
+              <div>
+                  <a href="{% url 'subfolder1-update' pk_parent=itemfolder.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+                  <a href="{% url 'subfolder1-delete' pk_parent=itemfolder.id %}" class="btn btn-danger btn-card-menu">Delete</a>
+              </div>
+            </div>
+          {%endfor%}
+        </div>
+      </section>
+
+      {% else %}
+      {% for item in files %}
+      <div class="col-sm-6" data-role="card-menus">
+        <div class="card card3">
+          <div class="card-body">
+            <div class="card-inside">
+                <div class="card-text-inside">
+                    <h5 class="card-title">{{item.nama_file}}</h5>
+                    <p class="card-text">Ini subtitle</p>
+                </div>
+                <div>
+                    <a href="{% static item.file_attachment.url %}" class="btn btn-success mr-3 btn-card-menu">Open</a>
+                    <a href="{% url 'file-update' pk_parent=item.id %}" class="btn btn-warning mr-3 btn-card-menu">Edit</a>
+                    <a href="{% url 'file-delete' pk_parent=item.id %}" class="btn btn-danger mr-3 btn-card-menu">Delete</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
     </div>
     </div>
   </section>
@@ -74,12 +157,10 @@
       {% for itemfolder in subfolder1 %}
         <div type="button" class="list-group-item list-group-item-action button list-main" data-role="list-menus" onclick="window.location='{% url 'subfolder2-list' itemfolder.id %}';">
           <a href="" class="text-decoration-none text-reset">{{itemfolder.nama_folder}}</a>
-          {% if roles == 'Admin' %}
-            <div>
-                <a href="{% url 'subfolder1-update' pk_parent=itemfolder.id %}" class="btn btn-warning btn-card-menu">Edit</a>
-                <a href="{% url 'subfolder1-delete' pk_parent=itemfolder.id %}" class="btn btn-danger btn-card-menu">Delete</a>
-            </div>
-          {% endif %}
+          <div>
+              <a href="{% url 'subfolder1-update' pk_parent=itemfolder.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+              <a href="{% url 'subfolder1-delete' pk_parent=itemfolder.id %}" class="btn btn-danger btn-card-menu">Delete</a>
+          </div>
         </div>
       {%endfor%}
     </div>

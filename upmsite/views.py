@@ -41,6 +41,8 @@ def InformasiUmum(request):
 
     prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
     
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
 
     informasiUmum = models.Folder.objects.filter(kategori='Informasi Umum')
     context = {
@@ -49,6 +51,8 @@ def InformasiUmum(request):
         'prodi': prodi,
         'semua_prodi': semua_prodi,
         'prodi_terpilih': prodi_terpilih,
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
     }
     return render(request, 'InformasiUmum/InformasiUmum.html', context)
 

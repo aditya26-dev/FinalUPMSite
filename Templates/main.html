@@ -50,9 +50,11 @@
                 </h2>
               </div>
               <div id="collapseTwo" class="collapse buttonTest2" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="">
+                {% for item in ami_umum %}
+                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'subfolder1-list' pk_parent=item.id %}">
                   Umum
                 </a>
+                {% endfor %}
                 {% if roles == 'Admin' %}
                 <div class="accordion navigation_menu" id="accordionExampleTwo">
                   <div class="card-head card1-2" id="headingFour">
@@ -103,9 +105,11 @@
                 </h2>
               </div>
               <div id="collapseThree" class="collapse buttonTest2" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'ABPT_Umum' %}">
+                {% for item in abpt_umum %}
+                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'subfolder1-list' pk_parent=item.id %}">
                   Umum
                 </a>
+                {% endfor %}
                 {% if roles == 'Admin' %}
                 <div class="accordion navigation_menu" id="accordionExampleThree">
                   <div class="card-head card1-2" id="headingFive">

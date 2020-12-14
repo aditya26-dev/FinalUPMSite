@@ -37,31 +37,60 @@ def data_pk_prodidef():
 
 data_pk_prodi1 = 0
 def SubFolder1List(request, pk_parent):
-    roles = request.user.roles
-    prodi = request.user.prodi
-    semua_prodi = models_account.ProgramStudi.objects.all()
-
-    subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
-    files = models.File.objects.filter(nama_folder__id = pk_parent)
-    folder = models.Folder.objects.get(id = pk_parent)
-    kategori = folder.kategori
-
     link1 = data_pk_prodidef()
 
     global data_pk_prodi1
     data_pk_prodi1 = pk_parent
 
-    context = {
-        'kategori': kategori,
-        'roles': roles,
-        'prodi': prodi,
-        'semua_prodi': semua_prodi,
-        'files': files,
-        'subfolder1': subfolder1,
-        'judul': folder,
-        'pk_parent': pk_parent,
-        'link1': link1,
-    }
+    amiumum = models.Folder.objects.get(id=pk_parent)
+    if amiumum.kategori == 'AMI':
+
+        amiumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
+        print(amiumum)
+        kategori = amiumum.kategori
+
+        context = {
+            'kategori': kategori,
+            'files': amiumum_files,
+            'pk_parent': pk_parent,
+            'link1': link1,
+            'judul': amiumum,
+        }
+    if amiumum.kategori == 'ABPT':
+        abptumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
+        abptumum_folders = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
+        kategori = amiumum.kategori
+
+        context = {
+            'folder': abptumum_folders,
+            'files': abptumum_files,
+            'pk_parent': pk_parent,
+            'kategori': kategori,
+            'link1': link1,
+            'judul': amiumum,
+        }
+
+    else:
+        roles = request.user.roles
+        prodi = request.user.prodi
+        semua_prodi = models_account.ProgramStudi.objects.all()
+
+        subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
+        files = models.File.objects.filter(nama_folder__id = pk_parent)
+        folder = models.Folder.objects.get(id = pk_parent)
+        kategori = folder.kategori
+
+        context = {
+            'kategori': kategori,
+            'roles': roles,
+            'prodi': prodi,
+            'semua_prodi': semua_prodi,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
+        }
     return render(request, 'Akreditasi/SubFolder1List.html', context)
 def data_pk_prodidef1():
     return data_pk_prodi1
