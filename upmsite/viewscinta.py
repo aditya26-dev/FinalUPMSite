@@ -8,35 +8,66 @@ data_pk_prodi = 0
 def FolderList(request, kategori, pk_prodi):
     roles = request.user.roles
     prodi = request.user.prodi
+
     semua_prodi = models_account.ProgramStudi.objects.all()
-    
-    informasiUmum = models.Folder.objects.filter(kategori=kategori, nama_prodi__id=pk_prodi)
-    selected_prodi = models_account.ProgramStudi.objects.get(id=pk_prodi)
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
 
     global data_pk_prodi
     data_pk_prodi = pk_prodi
+    if kategori == 'Informasi Umum':
+        kategori = kategori
+        informasiUmum = models.Folder.objects.filter(kategori=kategori)
 
-    label = kategori
-    if kategori == "ABPT":
-        label = "ABPT"
-    elif kategori == "AMI":
-        label = "AMI"
+        print(kategori)
 
-    context = {
-        'pk_prodi': pk_prodi,
-        'label': label,
+        context = {
+            'pk_prodi': pk_prodi,
+            'roles': roles,
+            'prodi': prodi,
+            'informasiUmum': informasiUmum,
+        }
+    else:
+        semua_prodi = models_account.ProgramStudi.objects.all()
+        
+        informasiUmum = models.Folder.objects.filter(kategori=kategori, nama_prodi__id=pk_prodi)
+        selected_prodi = models_account.ProgramStudi.objects.get(id=pk_prodi)
+
+        label = kategori
+        if kategori == "ABPT":
+            label = "ABPT"
+        elif kategori == "AMI":
+            label = "AMI"
+
+        context = {
+            'pk_prodi': pk_prodi,
+            'label': label,
+            'informasiUmum': informasiUmum,
+            'roles': roles,
+            'prodi': selected_prodi.nama_prodi,
+        }
+    context1 = {
         'kategori': kategori,
-        'informasiUmum': informasiUmum,
-        'roles': roles,
-        'prodi': selected_prodi.nama_prodi,
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
         'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
     }
-    return render(request, 'Akreditasi/FolderList.html', context)
+    return render(request, 'Akreditasi/FolderList.html', {**context , **context1})
 def data_pk_prodidef():
     return data_pk_prodi
 
 data_pk_prodi1 = 0
 def SubFolder1List(request, pk_parent):
+    roles = request.user.roles
+    prodi = request.user.prodi
+
+    semua_prodi = models_account.ProgramStudi.objects.all()
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
+
     link1 = data_pk_prodidef()
 
     global data_pk_prodi1
@@ -56,7 +87,7 @@ def SubFolder1List(request, pk_parent):
             'link1': link1,
             'judul': amiumum,
         }
-    if amiumum.kategori == 'ABPT':
+    elif amiumum.kategori == 'ABPT':
         abptumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
         abptumum_folders = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         kategori = amiumum.kategori
@@ -69,12 +100,7 @@ def SubFolder1List(request, pk_parent):
             'link1': link1,
             'judul': amiumum,
         }
-
     else:
-        roles = request.user.roles
-        prodi = request.user.prodi
-        semua_prodi = models_account.ProgramStudi.objects.all()
-
         subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         files = models.File.objects.filter(nama_folder__id = pk_parent)
         folder = models.Folder.objects.get(id = pk_parent)
@@ -82,16 +108,21 @@ def SubFolder1List(request, pk_parent):
 
         context = {
             'kategori': kategori,
-            'roles': roles,
-            'prodi': prodi,
-            'semua_prodi': semua_prodi,
             'files': files,
             'subfolder1': subfolder1,
             'judul': folder,
             'pk_parent': pk_parent,
             'link1': link1,
         }
-    return render(request, 'Akreditasi/SubFolder1List.html', context)
+
+    context1 = {
+        'roles': roles,
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
+        'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
+    }
+    return render(request, 'Akreditasi/SubFolder1List.html', {**context , **context1})
 def data_pk_prodidef1():
     return data_pk_prodi1
 
@@ -99,7 +130,11 @@ data_pk_prodi2 = 0
 def SubFolder2List(request, pk_parent):
     roles = request.user.roles
     prodi = request.user.prodi
+
     semua_prodi = models_account.ProgramStudi.objects.all()
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
 
     subfolder1 = models.SubFolder02.objects.filter(parent_folder__id = pk_parent)
     files = models.SubFile01.objects.filter(nama_folder__id = pk_parent)
@@ -127,14 +162,24 @@ def SubFolder2List(request, pk_parent):
         'link2': link2,
         'linksubfolder1': linksubfolder1,
     }
-    return render(request, 'Akreditasi/SubFolder2List.html', context)
+    context1 = {
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
+        'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
+    }
+    return render(request, 'Akreditasi/SubFolder2List.html', {**context , **context1})
 def data_pk_prodidef2():
     return data_pk_prodi2
 
 def SubFile2List(request, pk_parent):
     roles = request.user.roles
     prodi = request.user.prodi
+
     semua_prodi = models_account.ProgramStudi.objects.all()
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
 
     subfolder1 = models.SubFolder02.objects.filter(parent_folder__id = pk_parent)
     files = models.SubFile02.objects.filter(nama_folder__id = pk_parent)
@@ -164,7 +209,13 @@ def SubFile2List(request, pk_parent):
         'link3': link3,
         'linksubfolder2': linksubfolder2,
     }
-    return render(request, 'Akreditasi/SubFile2List.html', context)
+    context1 = {
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
+        'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
+    }
+    return render(request, 'Akreditasi/SubFile2List.html', {**context , **context1})
 
 # _______ CRUD FOLDER
 
@@ -172,12 +223,17 @@ class FolderCreate(CreateView):
     def get_initial(self):
         pk = self.kwargs.get('pk_prodi')
         kategori = self.kwargs.get('kategori')
-        parent_prodi = models_account.ProgramStudi.objects.get(id=pk)
 
-        return {
-            'kategori': kategori,
-            'nama_prodi': pk,
-        }
+        if kategori == 'Informasi Umum':
+            return {
+                'kategori': kategori,
+            }
+        else:
+            parent_prodi = models_account.ProgramStudi.objects.get(id=pk)
+            return {
+                'kategori': kategori,
+                'nama_prodi': pk,
+            }
 
     template_name = "Akreditasi/FolderAdd.html"
     form_class = forms.FormAddFolder
@@ -191,9 +247,15 @@ class FolderCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_prodi')
-        prodi_name = models_account.ProgramStudi.objects.get(id=pk)
-        context["prodi_name"] = prodi_name.nama_prodi
-        return context
+        kategori = self.kwargs.get('kategori')
+
+        if kategori == 'Informasi Umum':
+            context["prodi_name"] = kategori
+            return context
+        else:
+            prodi_name = models_account.ProgramStudi.objects.get(id=pk)
+            context["prodi_name"] = prodi_name.nama_prodi
+            return context
  
 class FolderUpdate(UpdateView):
     def get_object(self):
@@ -208,14 +270,22 @@ class FolderUpdate(UpdateView):
         pk = self.kwargs.get('pk_prodi')
         prodi = models.Folder.objects.get(id=pk)
         kategori = self.kwargs.get('kategori')
-        return reverse_lazy('folder-list', kwargs={'pk_prodi': prodi.nama_prodi.id, 'kategori': kategori})
+        if kategori == 'Informasi Umum':
+            return reverse_lazy('folder-list', kwargs={'pk_prodi': pk, 'kategori': kategori}) 
+        else:
+            return reverse_lazy('folder-list', kwargs={'pk_prodi': prodi.nama_prodi.id, 'kategori': kategori})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        kategori = self.kwargs.get('kategori')
         pk = self.kwargs.get('pk_prodi')
-        prodi_name = models.Folder.objects.get(id=pk)
-        context["prodi_name"] = prodi_name.nama_prodi
-        return context
+        if kategori == 'Informasi Umum':
+            context["prodi_name"] = kategori
+            return context
+        else:
+            prodi_name = models.Folder.objects.get(id=pk)
+            context["prodi_name"] = prodi_name.nama_prodi
+            return context
 
 class FolderDelete(DeleteView):
     def get_object(self):
@@ -231,14 +301,22 @@ class FolderDelete(DeleteView):
         pk = self.kwargs.get('pk_prodi')
         prodi = models.Folder.objects.get(id=pk)
         kategori = self.kwargs.get('kategori')
-        return reverse_lazy('folder-list', kwargs={'pk_prodi': prodi.nama_prodi.id, 'kategori': kategori})
+        if kategori == 'Informasi Umum':
+            return reverse_lazy('folder-list', kwargs={'pk_prodi': pk, 'kategori': kategori}) 
+        else:
+            return reverse_lazy('folder-list', kwargs={'pk_prodi': prodi.nama_prodi.id, 'kategori': kategori})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        kategori = self.kwargs.get('kategori')
         pk = self.kwargs.get('pk_prodi')
-        prodi_name = models.Folder.objects.get(id=pk)
-        context["prodi_name"] = prodi_name.nama_prodi
-        return context
+        if kategori == 'Informasi Umum':
+            context["prodi_name"] = kategori
+            return context
+        else:
+            prodi_name = models.Folder.objects.get(id=pk)
+            context["prodi_name"] = prodi_name.nama_prodi
+            return context
 
 # _______ CRUD FILE
 
