@@ -288,3 +288,12 @@ text-decoration: none;
   justify-content: space-between;
   align-items: center;
 }
+
+.text-control{
+  margin-left: 0.5rem;
+  margin-right: auto;
+}
+
+.main-active{
+  background-color: #00000041;
+}

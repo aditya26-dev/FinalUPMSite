@@ -22,7 +22,7 @@
           <div class="card card1">
             <div class="card-head card1-2" id="headingOne">
               <h2 class="mb-0"></h2>
-                <a class="btn btn-link btn-block text-left button1" type="button" href="{% url 'folder-list' kategori='Informasi Umum' pk_prodi=1 %}">  
+                <a class="btn btn-link btn-block text-left button1 {% if kategori == 'Informasi Umum' %}main-active{% endif %}" type="button" href="{% url 'folder-list' kategori='Informasi Umum' pk_prodi=1 %}">  
                   <div class="button-content">
                       <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-info-circle-fill house_icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
@@ -37,7 +37,7 @@
             <div class="card card1">
               <div class="card-head card1-2" id="headingTwo">
                 <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left collapsed button1" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <button class="btn btn-link btn-block text-left collapsed button1 {% if kategori == 'AMI' %}main-active{% endif %}" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <div class="button-content-2">
                         <div>Audit Mutu Internal</div>
                         <div class="caret">
@@ -49,9 +49,9 @@
                   </button>
                 </h2>
               </div>
-              <div id="collapseTwo" class="collapse buttonTest2" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div id="collapseTwo" class="{% if kategori == 'AMI'%}collapse show{% else %}collapse{% endif %} buttonTest2" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 {% for item in ami_umum %}
-                <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'subfolder1-list' pk_parent=item.id %}">
+                <a class="btn btn-link btn-block text-left button1 ml-4 {% if kategori == 'AMI' and prodi == None %}main-active{% endif %}" type="button" href="{% url 'subfolder1-list' pk_parent=item.id %}">
                   Umum
                 </a>
                 {% endfor %}
@@ -59,7 +59,7 @@
                 <div class="accordion navigation_menu" id="accordionExampleTwo">
                   <div class="card-head card1-2" id="headingFour">
                     <h2 class="mb-0">
-                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <button class="btn btn-link btn-block-inside text-left collapsed button1 ml-4 {% if kategori == 'AMI' and prodi != None %}main-active{% endif %}" id="buttonTest" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <div class="button-content-3">
                           <div>Prodi</div>
                           <div class="caret">
@@ -71,9 +71,9 @@
                       </button>
                     </h2>
                   </div>
-                  <div id="collapseFour" class="collapse buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
+                  <div id="collapseFour" class="{% if kategori == 'AMI' and prodi != None %}collapse show{% else %}collapse{% endif %} buttonTest2" aria-labelledby="headingFour" data-parent="#accordionExampleTwo">
                     {% for prodi in semua_prodi %}
-                    <a class="btn btn-link btn-block text-left button1 button-prodi" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=prodi.id%}">
+                    <a class="btn btn-link btn-block text-left button1 button-prodi {% if kategori == 'AMI' and prodi.id == pk_prodi %}main-active{% endif %}" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=prodi.id%}">
                       {{prodi.nama_prodi}}
                     </a>
                     {% endfor %}

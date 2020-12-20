@@ -3,6 +3,9 @@ from upmsite import models, forms
 from Accounts import models as models_account
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
+import datetime
+from django.utils import timezone
 
 data_pk_prodi = 0
 def FolderList(request, kategori, pk_prodi):
@@ -20,13 +23,29 @@ def FolderList(request, kategori, pk_prodi):
         kategori = kategori
         informasiUmum = models.Folder.objects.filter(kategori=kategori)
 
-        print(kategori)
+        print(informasiUmum[0].created_at)
+
+        print(timezone.localtime(informasiUmum[0].updated_at))
+        now = datetime.datetime.now()
+        nowtimezone = timezone.now()
+
+        print(informasiUmum)
+
+        time = timezone.localtime(informasiUmum[0].updated_at)
+        p_informasiumum = Paginator(informasiUmum, 5)
+        page_number = request.GET.get('page')
+        
+        jumlah_halaman = []
+
+        for x in range(1, p_informasiumum.num_pages+1):
+            jumlah_halaman.append(x)
 
         context = {
             'pk_prodi': pk_prodi,
             'roles': roles,
             'prodi': prodi,
-            'informasiUmum': informasiUmum,
+            'pages': p_informasiumum.get_page(page_number),
+            'jumlah_halaman': jumlah_halaman,
         }
     else:
         semua_prodi = models_account.ProgramStudi.objects.all()
@@ -75,13 +94,16 @@ def SubFolder1List(request, pk_parent):
 
     amiumum = models.Folder.objects.get(id=pk_parent)
     if amiumum.kategori == 'AMI':
-
+        amiumum_folders = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         amiumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
-        print(amiumum)
         kategori = amiumum.kategori
 
+        print(amiumum.nama_prodi)
+
         context = {
+            'bagian': amiumum.nama_prodi,
             'kategori': kategori,
+            'folder': amiumum_folders,
             'files': amiumum_files,
             'pk_parent': pk_parent,
             'link1': link1,
@@ -92,13 +114,29 @@ def SubFolder1List(request, pk_parent):
         abptumum_folders = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         kategori = amiumum.kategori
 
+
         context = {
+            'bagian': amiumum.nama_prodi,
+            'kategori': kategori,
             'folder': abptumum_folders,
             'files': abptumum_files,
             'pk_parent': pk_parent,
-            'kategori': kategori,
             'link1': link1,
             'judul': amiumum,
+        }
+    elif amiumum.kategori == 'Informasi Umum':
+        subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
+        files = models.File.objects.filter(nama_folder__id = pk_parent)
+        folder = models.Folder.objects.get(id = pk_parent)
+        kategori = folder.kategori
+
+        context = {
+            'kategori': kategori,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
         }
     else:
         subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
@@ -146,11 +184,13 @@ def SubFolder2List(request, pk_parent):
     link2 = data_pk_prodidef1()
     linksubfolder1 = models.Folder.objects.get(id = link2)
 
+    print(folder.parent_folder.nama_prodi)
 
     global data_pk_prodi2
     data_pk_prodi2 = pk_parent
 
     context = {
+        'bagian': folder.parent_folder.nama_prodi,
         'kategori': kategori,
         'roles': roles,
         'semua_prodi': semua_prodi,
@@ -193,9 +233,8 @@ def SubFile2List(request, pk_parent):
     link3 = data_pk_prodidef2()
     linksubfolder2 = models.SubFolder01.objects.get(id = link3)
 
-
-
     context = {
+        'bagian': folder.parent_folder.parent_folder.nama_prodi,
         'kategori': kategori,
         'roles': roles,
         'semua_prodi': semua_prodi,

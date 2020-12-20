@@ -5,9 +5,19 @@
 <section>
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}} {{judul.parent_folder.nama_prodi}}</a></li>
+        {% if kategori == 'Informasi Umum' %}
+        <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}}</a></li>
         <li class="breadcrumb-item"><a href="{% url 'subfolder1-list' pk_parent=link2 %}">{{linksubfolder1.nama_folder}}</a></li>
         <li class="breadcrumb-item active" aria-current="page" href="">{{judul.nama_folder}}</li>
+        {% elif bagian == None %}
+        <li class="breadcrumb-item"><a href="{% url 'subfolder1-list' pk_parent=link2 %}">{{linksubfolder1.nama_folder}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page" href="">{{judul.nama_folder}}</li>
+        {% else %}
+        <li class="breadcrumb-item"><a href="{% url 'folder-list' kategori=kategori pk_prodi=link1 %}">{{kategori}} {{bagian}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'subfolder1-list' pk_parent=link2 %}">{{linksubfolder1.nama_folder}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page" href="">{{judul.nama_folder}}</li>
+        {% endif %}
+
         
         
       </ol>

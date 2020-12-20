@@ -14,8 +14,13 @@ class Folder(models.Model):
     nama_prodi = models.ForeignKey(ProgramStudi, on_delete=models.CASCADE, blank = True, null = True)
     kategori = models.CharField(max_length=50, choices=listKategori)
     public_status = models.BooleanField(default = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     isAllowNewFolder = models.BooleanField(default = True)
     isAllowNewFile = models.BooleanField(default = True)
+
+    class Meta:
+        ordering = ['-updated_at']
 
     def __str__(self):
         return '{} ({})'.format(self.nama_folder, self.nama_prodi)
