@@ -16,3 +16,18 @@ $(document).ready(function () {
         $('.buttonTest2').removeClass('show');
     });
 });
+
+$(document).ready(function () {
+    var typed = new Typed('#typed', {
+    stringsElement: '#typed-strings',
+    typeSpeed: 40, //ini waktu ngetiknya
+    showCursor: false
+    });
+
+    var typed = new Typed('#typed-2', {
+    stringsElement: '#typed-strings-2',
+    typeSpeed: 40,
+    startDelay: 2000, //ini delay sebelum mulai, dalam ms semua
+    showCursor: false
+    });
+});

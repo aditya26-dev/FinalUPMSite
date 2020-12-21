@@ -303,3 +303,39 @@ text-decoration: none;
 .main-active{
   background-color: #00000041;
 }
+
+@media(min-width:768px) { /* tambah 2 ini aja, yg laen jgn diapus */
+  #rightScreen.toggled {
+    margin-left: -261px; <-- ganti jadi -261 klo belom
+    transition: all 0.5s;
+  }
+  .img-container {
+    margin-left: 261px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+}
+
+.main-img {
+  width: 100%;
+  height: 685px;
+}
+
+.text-deco {
+  font-size: xx-large;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+}
+
+.top-typed-text {
+  top: 10%;
+  left: 2%;
+}
+
+.btm-typed-text {
+  top: 20%;
+  left: 2%;
+}

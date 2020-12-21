@@ -9,7 +9,7 @@ from Accounts import models as models_account
 def home(request):
     # query ke model Folder based on is_public = True , Category informasi umum 
     # kemudian pass konten ke main.html 
-    return render(request, 'main.html')
+    return render(request, 'Home.html')
 
 def pengaturanakun(request):
     return render(request,"Account/Pengaturan_Akun.html")

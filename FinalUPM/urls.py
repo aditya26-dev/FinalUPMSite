@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('login/',views_account.loginPage, name="login"),
     path('logout/', views_account.logoutUser, name="logout"),
+    
     path('register/', views_account.daftarakun, name="register"),
     path('akun/', akun.as_view(), name='akun'),
     path('editprofile/', views_account.editakun, name="editprofile"),
