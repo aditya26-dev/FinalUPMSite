@@ -94,7 +94,7 @@
                     {% endfor %}
                   </div>
                 </div>
-                {% elif roles == 'Faculty Member' %}
+                {% elif roles == 'Faculty Member' or roles == 'Admin Prodi' %}
                   {% for item in prodi_terpilih %}
                     <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=item.id %}">
                       {{item.nama_prodi}}

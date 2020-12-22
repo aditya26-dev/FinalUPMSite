@@ -16,6 +16,7 @@ class User(AbstractUser):
     prodi = models.ForeignKey(ProgramStudi, models.SET_NULL, blank=True, null=True, default=None)
     role_list = (
         ('Admin', 'Admin'),
+        ('Admin Prodi', 'Admin Prodi'),
         ('Faculty Member', 'Faculty Member'),
         ('Professional Staf', 'Professional Staf')
     )

@@ -20,6 +20,7 @@ urlpatterns = [
     path('register/', views_account.daftarakun, name="register"),
     path('akun/', akun.as_view(), name='akun'),
     path('editprofile/', views_account.editakun, name="editprofile"),
+    path('password/', views_account.change_password, name='change_password'),
 
     #ami umum
     # path('amiumum/', views_upmsite.AMIUmum, name='ami_umum'),
