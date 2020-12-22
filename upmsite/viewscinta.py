@@ -6,6 +6,28 @@ from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 import datetime
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
+
+@login_required(login_url='login')
+def home(request):
+    roles = request.user.roles
+    prodi = request.user.prodi
+
+    semua_prodi = models_account.ProgramStudi.objects.all()
+    prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
+    ami_umum = models.Folder.objects.filter(nama_prodi=None, kategori='AMI')
+    abpt_umum = models.Folder.objects.filter(nama_prodi=None, kategori='ABPT')
+
+    context = {
+        'roles': roles,
+        'prodi': prodi,
+        'ami_umum': ami_umum,
+        'abpt_umum': abpt_umum,
+        'semua_prodi': semua_prodi,
+        'prodi_terpilih': prodi_terpilih,
+    }
+    return render(request, 'Home.html', context)
 
 data_pk_prodi = 0
 def FolderList(request, kategori, pk_prodi):
@@ -23,17 +45,14 @@ def FolderList(request, kategori, pk_prodi):
         kategori = kategori
         informasiUmum = models.Folder.objects.filter(kategori=kategori)
 
-        print(informasiUmum[0].created_at)
-
-        print(timezone.localtime(informasiUmum[0].updated_at))
         now = datetime.datetime.now()
         nowtimezone = timezone.now()
-
-        print(informasiUmum)
 
         time = timezone.localtime(informasiUmum[0].updated_at)
         p_informasiumum = Paginator(informasiUmum, 5)
         page_number = request.GET.get('page')
+
+        totalfolder = len(informasiUmum)
         
         jumlah_halaman = []
 
@@ -46,12 +65,24 @@ def FolderList(request, kategori, pk_prodi):
             'prodi': prodi,
             'pages': p_informasiumum.get_page(page_number),
             'jumlah_halaman': jumlah_halaman,
+            'totalfolder': totalfolder,
         }
     else:
         semua_prodi = models_account.ProgramStudi.objects.all()
         
         informasiUmum = models.Folder.objects.filter(kategori=kategori, nama_prodi__id=pk_prodi)
         selected_prodi = models_account.ProgramStudi.objects.get(id=pk_prodi)
+
+        p_informasiumum = Paginator(informasiUmum, 5)
+
+        totalfolder = len(informasiUmum)
+
+        jumlah_halaman = []
+
+        page_number = request.GET.get('page')
+
+        for x in range(1, p_informasiumum.num_pages+1):
+            jumlah_halaman.append(x)
 
         label = kategori
         if kategori == "ABPT":
@@ -65,6 +96,9 @@ def FolderList(request, kategori, pk_prodi):
             'informasiUmum': informasiUmum,
             'roles': roles,
             'prodi': selected_prodi.nama_prodi,
+            'pages': p_informasiumum.get_page(page_number),
+            'jumlah_halaman': jumlah_halaman,
+            'totalfolder': totalfolder,
         }
     context1 = {
         'kategori': kategori,
@@ -98,37 +132,140 @@ def SubFolder1List(request, pk_parent):
         amiumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
         kategori = amiumum.kategori
 
-        print(amiumum.nama_prodi)
+        prodi = models.Folder.objects.get(id = pk_parent)
+        print(prodi)
 
-        context = {
-            'bagian': amiumum.nama_prodi,
-            'kategori': kategori,
-            'folder': amiumum_folders,
-            'files': amiumum_files,
-            'pk_parent': pk_parent,
-            'link1': link1,
-            'judul': amiumum,
-        }
+        totalfile = len(amiumum_files)
+        totalfolder = len(amiumum_folders)
+
+        p_informasiumum = Paginator(amiumum_folders, 5)
+        p_informasiumumfile = Paginator(amiumum_files, 5)
+        page_number = request.GET.get('page')
+        page_numberfile = request.GET.get('pagefile')
+
+        jumlah_halaman = []
+        jumlah_halamanfile = []
+
+        for x in range(1, p_informasiumum.num_pages+1):
+            jumlah_halaman.append(x)
+
+        for x in range(1, p_informasiumumfile.num_pages+1):
+            jumlah_halamanfile.append(x)
+
+        if prodi.nama_prodi != None:
+            context = {
+                'bagian': amiumum.nama_prodi,
+                'kategori': kategori,
+                'folder': amiumum_folders,
+                'files': amiumum_files,
+                'pk_parent': pk_parent,
+                'link1': link1,
+                'judul': amiumum,
+                'pages': p_informasiumum.get_page(page_number),
+                'filepages': p_informasiumumfile.get_page(page_numberfile),
+                'jumlah_halaman': jumlah_halaman,
+                'jumlah_halamanfile': jumlah_halamanfile,
+                'totalfile': totalfile,
+                'totalfolder': totalfolder,
+                'prodi': prodi,
+                'pk_prodi': prodi.nama_prodi.id,
+            }
+        else:
+            context = {
+                'bagian': amiumum.nama_prodi,
+                'kategori': kategori,
+                'folder': amiumum_folders,
+                'files': amiumum_files,
+                'pk_parent': pk_parent,
+                'link1': link1,
+                'judul': amiumum,
+                'pages': p_informasiumum.get_page(page_number),
+                'filepages': p_informasiumumfile.get_page(page_numberfile),
+                'jumlah_halaman': jumlah_halaman,
+                'jumlah_halamanfile': jumlah_halamanfile,
+                'totalfile': totalfile,
+                'totalfolder': totalfolder,
+            }
     elif amiumum.kategori == 'ABPT':
         abptumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
         abptumum_folders = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         kategori = amiumum.kategori
 
+        prodi = models.Folder.objects.get(id = pk_parent)
 
-        context = {
-            'bagian': amiumum.nama_prodi,
-            'kategori': kategori,
-            'folder': abptumum_folders,
-            'files': abptumum_files,
-            'pk_parent': pk_parent,
-            'link1': link1,
-            'judul': amiumum,
-        }
+        totalfile = len(abptumum_files)
+        totalfolder = len(abptumum_folders)
+
+        p_informasiumum = Paginator(abptumum_folders, 5)
+        p_informasiumumfile = Paginator(abptumum_files, 5)
+        page_number = request.GET.get('page')
+        page_numberfile = request.GET.get('pagefile')
+
+        jumlah_halaman = []
+        jumlah_halamanfile = []
+
+        for x in range(1, p_informasiumum.num_pages+1):
+            jumlah_halaman.append(x)
+
+        for x in range(1, p_informasiumumfile.num_pages+1):
+            jumlah_halamanfile.append(x)
+
+        if prodi.nama_prodi != None:
+            context = {
+                'bagian': amiumum.nama_prodi,
+                'kategori': kategori,
+                'folder': abptumum_folders,
+                'files': abptumum_files,
+                'pk_parent': pk_parent,
+                'link1': link1,
+                'judul': amiumum,
+                'pages': p_informasiumum.get_page(page_number),
+                'filepages': p_informasiumumfile.get_page(page_numberfile),
+                'jumlah_halaman': jumlah_halaman,
+                'jumlah_halamanfile': jumlah_halamanfile,
+                'totalfile': totalfile,
+                'totalfolder': totalfolder,
+                'prodi': prodi,
+                'pk_prodi': prodi.nama_prodi.id,
+            }
+        else:
+            context = {
+                'bagian': amiumum.nama_prodi,
+                'kategori': kategori,
+                'folder': abptumum_folders,
+                'files': abptumum_files,
+                'pk_parent': pk_parent,
+                'link1': link1,
+                'judul': amiumum,
+                'pages': p_informasiumum.get_page(page_number),
+                'filepages': p_informasiumumfile.get_page(page_numberfile),
+                'jumlah_halaman': jumlah_halaman,
+                'jumlah_halamanfile': jumlah_halamanfile,
+                'totalfile': totalfile,
+                'totalfolder': totalfolder,
+            }
     elif amiumum.kategori == 'Informasi Umum':
         subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         files = models.File.objects.filter(nama_folder__id = pk_parent)
         folder = models.Folder.objects.get(id = pk_parent)
         kategori = folder.kategori
+
+        totalfile = len(files)
+        totalfolder = len(subfolder1)
+
+        p_informasiumum = Paginator(subfolder1, 5)
+        p_informasiumumfile = Paginator(files, 5)
+        page_number = request.GET.get('page')
+        page_numberfile = request.GET.get('pagefile')
+
+        jumlah_halaman = []
+        jumlah_halamanfile = []
+
+        for x in range(1, p_informasiumum.num_pages+1):
+            jumlah_halaman.append(x)
+
+        for x in range(1, p_informasiumumfile.num_pages+1):
+            jumlah_halamanfile.append(x)
 
         context = {
             'kategori': kategori,
@@ -137,6 +274,12 @@ def SubFolder1List(request, pk_parent):
             'judul': folder,
             'pk_parent': pk_parent,
             'link1': link1,
+            'pages': p_informasiumum.get_page(page_number),
+            'filepages': p_informasiumumfile.get_page(page_numberfile),
+            'jumlah_halaman': jumlah_halaman,
+            'jumlah_halamanfile': jumlah_halamanfile,
+            'totalfile': totalfile,
+            'totalfolder': totalfolder,
         }
     else:
         subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
@@ -167,7 +310,7 @@ def data_pk_prodidef1():
 data_pk_prodi2 = 0
 def SubFolder2List(request, pk_parent):
     roles = request.user.roles
-    prodi = request.user.prodi
+    prodi = models.SubFolder01.objects.get(id = pk_parent)
 
     semua_prodi = models_account.ProgramStudi.objects.all()
     prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
@@ -184,24 +327,68 @@ def SubFolder2List(request, pk_parent):
     link2 = data_pk_prodidef1()
     linksubfolder1 = models.Folder.objects.get(id = link2)
 
-    print(folder.parent_folder.nama_prodi)
+    totalfile = len(files)
+    totalfolder = len(subfolder1)
+
+    p_informasiumum = Paginator(subfolder1, 5)
+    p_informasiumumfile = Paginator(files, 5)
+    page_number = request.GET.get('page')
+    page_numberfile = request.GET.get('pagefile')
+
+    jumlah_halaman = []
+    jumlah_halamanfile = []
+
+    for x in range(1, p_informasiumum.num_pages+1):
+        jumlah_halaman.append(x)
+
+    for x in range(1, p_informasiumumfile.num_pages+1):
+        jumlah_halamanfile.append(x)
 
     global data_pk_prodi2
     data_pk_prodi2 = pk_parent
 
-    context = {
-        'bagian': folder.parent_folder.nama_prodi,
-        'kategori': kategori,
-        'roles': roles,
-        'semua_prodi': semua_prodi,
-        'files': files,
-        'subfolder1': subfolder1,
-        'judul': folder,
-        'pk_parent': pk_parent,
-        'link1': link1,
-        'link2': link2,
-        'linksubfolder1': linksubfolder1,
-    }
+    if prodi.parent_folder.nama_prodi != None:
+        context = {
+            'bagian': folder.parent_folder.nama_prodi,
+            'kategori': kategori,
+            'roles': roles,
+            'semua_prodi': semua_prodi,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
+            'link2': link2,
+            'linksubfolder1': linksubfolder1,
+            'pages': p_informasiumum.get_page(page_number),
+            'filepages': p_informasiumumfile.get_page(page_numberfile),
+            'jumlah_halaman': jumlah_halaman,
+            'jumlah_halamanfile': jumlah_halamanfile,
+            'totalfile': totalfile,
+            'totalfolder': totalfolder,
+            'pk_prodi': prodi.parent_folder.nama_prodi.id,
+            'prodi': prodi,
+        }
+    else:
+        context = {
+            'bagian': folder.parent_folder.nama_prodi,
+            'kategori': kategori,
+            'roles': roles,
+            'semua_prodi': semua_prodi,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
+            'link2': link2,
+            'linksubfolder1': linksubfolder1,
+            'pages': p_informasiumum.get_page(page_number),
+            'filepages': p_informasiumumfile.get_page(page_numberfile),
+            'jumlah_halaman': jumlah_halaman,
+            'jumlah_halamanfile': jumlah_halamanfile,
+            'totalfile': totalfile,
+            'totalfolder': totalfolder,
+        }
     context1 = {
         'ami_umum': ami_umum,
         'abpt_umum': abpt_umum,
@@ -227,27 +414,65 @@ def SubFile2List(request, pk_parent):
 
     kategori = folder.parent_folder.parent_folder.kategori
 
+    prodibagian = models.SubFolder02.objects.get(id = pk_parent)
+
     link1 = data_pk_prodidef()
     link2 = data_pk_prodidef1()
     linksubfolder1 = models.Folder.objects.get(id = link2)
     link3 = data_pk_prodidef2()
     linksubfolder2 = models.SubFolder01.objects.get(id = link3)
 
-    context = {
-        'bagian': folder.parent_folder.parent_folder.nama_prodi,
-        'kategori': kategori,
-        'roles': roles,
-        'semua_prodi': semua_prodi,
-        'files': files,
-        'subfolder1': subfolder1,
-        'judul': folder,
-        'pk_parent': pk_parent,
-        'link1': link1,
-        'link2': link2,
-        'linksubfolder1': linksubfolder1,
-        'link3': link3,
-        'linksubfolder2': linksubfolder2,
-    }
+    totalfile = len(files)
+
+    p_informasiumumfile = Paginator(files, 5)
+
+    page_numberfile = request.GET.get('pagefile')
+
+    jumlah_halamanfile = []
+
+    for x in range(1, p_informasiumumfile.num_pages+1):
+        jumlah_halamanfile.append(x)
+
+    if prodibagian.parent_folder.parent_folder.nama_prodi != None:
+        context = {
+            'bagian': folder.parent_folder.parent_folder.nama_prodi,
+            'kategori': kategori,
+            'roles': roles,
+            'semua_prodi': semua_prodi,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
+            'link2': link2,
+            'linksubfolder1': linksubfolder1,
+            'link3': link3,
+            'linksubfolder2': linksubfolder2,
+            'filepages': p_informasiumumfile.get_page(page_numberfile),
+            'jumlah_halamanfile': jumlah_halamanfile,
+            'totalfile': totalfile,  
+            'pk_prodi': prodibagian.parent_folder.parent_folder.nama_prodi.id,
+            'prodi': prodibagian,
+        }
+    else:
+        context = {
+            'bagian': folder.parent_folder.parent_folder.nama_prodi,
+            'kategori': kategori,
+            'roles': roles,
+            'semua_prodi': semua_prodi,
+            'files': files,
+            'subfolder1': subfolder1,
+            'judul': folder,
+            'pk_parent': pk_parent,
+            'link1': link1,
+            'link2': link2,
+            'linksubfolder1': linksubfolder1,
+            'link3': link3,
+            'linksubfolder2': linksubfolder2,
+            'filepages': p_informasiumumfile.get_page(page_numberfile),
+            'jumlah_halamanfile': jumlah_halamanfile,
+            'totalfile': totalfile,  
+        }
     context1 = {
         'ami_umum': ami_umum,
         'abpt_umum': abpt_umum,
@@ -287,7 +512,7 @@ class FolderCreate(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_prodi')
         kategori = self.kwargs.get('kategori')
-
+        context["crud"] = 'Add New Folder'
         if kategori == 'Informasi Umum':
             context["prodi_name"] = kategori
             return context
@@ -318,6 +543,7 @@ class FolderUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         kategori = self.kwargs.get('kategori')
         pk = self.kwargs.get('pk_prodi')
+        context["crud"] = 'Update Folder'
         if kategori == 'Informasi Umum':
             context["prodi_name"] = kategori
             return context
@@ -380,7 +606,8 @@ class FileCreate(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.Folder.objects.get(id=pk)
-        context["prodi_name"] = prodi_name
+        context["crud"] = 'Add New File'
+        context["prodi_name"] = prodi_name.nama_folder
         return context
 
 class FileUpdate(UpdateView):
@@ -402,6 +629,7 @@ class FileUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.File.objects.get(id=pk)
+        context["crud"] = 'Update File'
         context["prodi_name"] = prodi_name.nama_folder
         return context
 
@@ -450,6 +678,7 @@ class SubFolder1Create(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         folder = models.Folder.objects.get(id=pk)
+        context["crud"] = 'Add New Folder'
         context["prodi_name"] = folder.nama_folder
         return context
 
@@ -471,6 +700,7 @@ class SubFolder1Update(UpdateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         folder = models.SubFolder01.objects.get(id=pk)
+        context["crud"] = 'Update Folder'
         context["prodi_name"] = folder.nama_folder
         return context
 
@@ -519,6 +749,7 @@ class SubFile1Create(CreateView):
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.SubFolder01.objects.get(id=pk)
         context["prodi_name"] = prodi_name
+        context["crud"] = 'Add New File'
         return context
 
 class SubFile1Update(UpdateView):
@@ -540,6 +771,7 @@ class SubFile1Update(UpdateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         folder = models.SubFile01.objects.get(id=pk)
+        context["crud"] = 'Update File'
         context["prodi_name"] = folder.nama_file
         return context
 
@@ -588,6 +820,7 @@ class SubFolder2Create(CreateView):
         pk = self.kwargs.get('pk_parent')
         folder = models.SubFolder01.objects.get(id=pk)
         context["prodi_name"] = folder.nama_folder
+        context["crud"] = 'Add New Folder'
         return context
 
 class SubFolder2Update(UpdateView):
@@ -608,6 +841,7 @@ class SubFolder2Update(UpdateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         folder = models.SubFolder02.objects.get(id=pk)
+        context["crud"] = 'Update Folder'
         context["prodi_name"] = folder.nama_folder
         return context
 
@@ -655,6 +889,7 @@ class SubFile2Create(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.SubFolder02.objects.get(id=pk)
+        context["crud"] = 'Add New File'
         context["prodi_name"] = prodi_name
         return context
 
@@ -676,6 +911,7 @@ class SubFile2Update(UpdateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         folder = models.SubFile02.objects.get(id=pk)
+        context["crud"] = 'Update File'
         context["prodi_name"] = folder.nama_file
         return context
 

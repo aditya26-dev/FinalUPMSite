@@ -20,7 +20,7 @@ class FormAddFolder(ModelForm):
         fields = '__all__'
         widgets = {
             'nama_folder' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Tulis nama Folder di sini ...'}),
-            'nama_prodi' : forms.Select(attrs={'class': 'form-control'}),
+            'nama_prodi' : forms.Select(attrs={'class': 'form-control', 'remove_attr':"autofocus"}),
             'kategori' : forms.Select(attrs={'class': 'form-control'}),
             'public_status' : forms.CheckboxInput()
         }

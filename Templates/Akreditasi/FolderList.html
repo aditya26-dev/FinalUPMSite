@@ -32,6 +32,7 @@
       {% endif %}
   </section>
 
+  {% if totalfolder >= 1 %}
   <section class="page-title" style="margin-left: 17.9rem; margin-right: 4rem;">
     <div class="list-group">
       {%for item in pages%}
@@ -85,7 +86,7 @@
       </nav>
     </div>
   </section>
-  
+  {% endif %}
 
 {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
