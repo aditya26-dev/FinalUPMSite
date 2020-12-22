@@ -191,16 +191,10 @@ text-decoration: none;
   height: 7rem;
 }
 
-.card-inside {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-text-inside {
-  flex-direction: column;
-}
-
 @media(min-width:768px) {
+  .prasmul_logo {
+    width: 261px;
+  }
   .left_navigation{
     max-width: 261px;
     height: 100vh;
@@ -212,50 +206,50 @@ text-decoration: none;
     transition: all 0.5s;
   }
   #wrapper {
-  padding-left: 250px;
+    padding-left: 250px;
   }
   .fixed-brand {
-  width: 250px;
+    width: 250px;
   }
   #wrapper.toggled {
-  padding-left: 0;
+    padding-left: 0;
   }
   #sidebar-wrapper {
-  width: 250px;
+    width: 250px;
   }
   .breadcrumb {
-  margin-left: 250px;
+    margin-left: 250px;
   }
-  ol.breadcrumb {
-  padding-left: 27px;
+   ol.breadcrumb {
+    padding-left: 27px;
   }
   .page-title {
-  margin-top: 2rem;
-  margin-left: 17.5rem;
-  margin-right: 4rem;
+    margin-top: 2rem;
+    margin-left: 17.5rem;
+    margin-right: 4rem;
   }
   .box-inside {
-  background: #FFFFFF;
-  padding-top: 5px;
-  margin-left: 15rem;
+    background: #FFFFFF;
+    padding-top: 5px;
+    margin-left: 15rem;
   } 
   .folder-card {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
   }
   .top-bar {
-  margin-left: 261px;
+    margin-left: 261px;
   }
   .form-area {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
   }
   #leftSidebar.toggled {
     margin-left: -261px;
     transition: all 0.5s;
   }
   #rightScreen.toggled {
-    margin-left: -250px;
+    margin-left: -261px;
     transition: all 0.5s;
   }
   .search1 {
@@ -316,8 +310,44 @@ text-decoration: none;
   }
 }
 
+@media (min-width: 576px) and (max-width: 768px) { 
+  .prasmul_logo {
+    width: 550px;
+  }
+  .search1 {
+    width: 250px;
+  }
+  #leftSidebar.toggled {
+    margin-top: -364px;
+    transition: all 0.5s;
+  }
+}
+
+@media (max-width: 576px) {
+  .prasmul_logo {
+    width: 450px;
+  }
+  #leftSidebar.toggled {
+    margin-top: -335px;
+    transition: all 0.5s;
+  }
+  .navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+
 .right-menu {
   display: flex;
+}
+
+@media (min-width: 1200px) {
+  .card-inside {
+    display: flex;
+    justify-content: space-between;
+  }
+  .card-text-inside {
+    flex-direction: column;
+  }
 }
 
 .list-main {
@@ -335,42 +365,25 @@ text-decoration: none;
   background-color: #00000041;
 }
 
-@media(min-width:768px) { /* tambah 2 ini aja, yg laen jgn diapus */
-  #rightScreen.toggled {
-    margin-left: -261px; <-- ganti jadi -261 klo belom
-    transition: all 0.5s;
-  }
-  .img-container {
-    margin-left: 261px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-}
-
 .main-img {
   width: 100%;
-  height: 685px;
 }
 
 .text-deco {
-  font-size: xx-large;
   color: white;
-  position: absolute;
-  top: 10%;
-  left: 35%;
-}
-
-.top-typed-text {
-  top: 10%;
-  left: 2%;
+  position: absolute;  
 }
 
 .btm-typed-text {
-  top: 20%;
-  left: 2%;
+  margin-top: 50px;
 }
 
+.text-container {
+  width: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
 
 .folder-file{
   margin-bottom: 1.1rem;
