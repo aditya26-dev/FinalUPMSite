@@ -68,6 +68,8 @@ def FolderList(request, kategori, pk_prodi):
             'totalfolder': totalfolder,
         }
     else:
+        roles = request.user.roles
+        
         semua_prodi = models_account.ProgramStudi.objects.all()
         
         informasiUmum = models.Folder.objects.filter(kategori=kategori, nama_prodi__id=pk_prodi)
@@ -78,6 +80,7 @@ def FolderList(request, kategori, pk_prodi):
         totalfolder = len(informasiUmum)
 
         jumlah_halaman = []
+        print(roles)
 
         page_number = request.GET.get('page')
 
@@ -132,8 +135,9 @@ def SubFolder1List(request, pk_parent):
         amiumum_files = models.File.objects.filter(nama_folder__id = pk_parent)
         kategori = amiumum.kategori
 
+        print(amiumum.nama_prodi)
+
         prodi = models.Folder.objects.get(id = pk_parent)
-        print(prodi)
 
         totalfile = len(amiumum_files)
         totalfolder = len(amiumum_folders)
@@ -310,7 +314,9 @@ def data_pk_prodidef1():
 data_pk_prodi2 = 0
 def SubFolder2List(request, pk_parent):
     roles = request.user.roles
-    prodi = models.SubFolder01.objects.get(id = pk_parent)
+    prodi = request.user.prodi
+
+    prodibagian = models.SubFolder01.objects.get(id = pk_parent)
 
     semua_prodi = models_account.ProgramStudi.objects.all()
     prodi_terpilih = models_account.ProgramStudi.objects.filter(id=prodi.id)
@@ -347,7 +353,7 @@ def SubFolder2List(request, pk_parent):
     global data_pk_prodi2
     data_pk_prodi2 = pk_parent
 
-    if prodi.parent_folder.nama_prodi != None:
+    if prodibagian.parent_folder.nama_prodi != None:
         context = {
             'bagian': folder.parent_folder.nama_prodi,
             'kategori': kategori,
@@ -366,8 +372,8 @@ def SubFolder2List(request, pk_parent):
             'jumlah_halamanfile': jumlah_halamanfile,
             'totalfile': totalfile,
             'totalfolder': totalfolder,
-            'pk_prodi': prodi.parent_folder.nama_prodi.id,
-            'prodi': prodi,
+            'pk_prodi': prodibagian.parent_folder.nama_prodi.id,
+            'prodi': prodibagian,
         }
     else:
         context = {

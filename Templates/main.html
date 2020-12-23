@@ -113,7 +113,7 @@
                 </div>
                 {% elif roles == 'Faculty Member' or roles == 'Admin Prodi' %}
                   {% for item in prodi_terpilih %}
-                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=item.id %}">
+                    <a class="btn btn-link btn-block text-left button1 ml-4 {% if kategori == 'AMI' and item.id == pk_prodi %}main-active{% endif %}" type="button" href="{% url 'folder-list' kategori='AMI' pk_prodi=item.id %}">
                       {{item.nama_prodi}}
                     </a>
                   {% endfor %}
@@ -166,9 +166,9 @@
                     {% endfor %}
                   </div>
                 </div>
-                {% elif roles == 'Faculty Member' %}
+                {% elif roles == 'Faculty Member' or roles == 'Admin Prodi' %}
                   {% for item in prodi_terpilih %}
-                    <a class="btn btn-link btn-block text-left button1 ml-4" type="button" href="{% url 'folder-list' kategori='ABPT' pk_prodi=item.id %}">
+                    <a class="btn btn-link btn-block text-left button1 ml-4 {% if kategori == 'ABPT' and item.id == pk_prodi %}main-active{% endif %}" type="button" href="{% url 'folder-list' kategori='ABPT' pk_prodi=item.id %}">
                       {{item.nama_prodi}}
                     </a>
                   {% endfor %}
@@ -180,18 +180,19 @@
         </div>
     </section> 
 
+
     <section id="rightScreen">
         <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
           <div class="right-menu">
-            <button class="btn" id="sidebarCollapse">
+            <button class="btn btn-navbar" id="sidebarCollapse">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
               </svg>
             </button>
-            <div class="search1 ml-4">
-              <input class="input-sm border-0 p-2 col-md-11 input_search1" id="searchbox" type="text" placeholder="Search anything...">
-            </div>
+            {% block search %}
+            {% endblock %}
           </div>
+
 
           <div class="profile-area">
             <ul class="navbar-nav ml-auto">

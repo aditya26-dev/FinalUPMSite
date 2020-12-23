@@ -1,5 +1,12 @@
 {% extends 'main.html' %}
 {% load static %}
+
+{% block search %}
+      <div class="search1">
+        <input class="input-sm border-0 p-2 col-md-11 input_search1" id="searchbox" type="text" placeholder="Search anything...">
+      </div>
+{% endblock %}
+
 {% block content %}
 
 <section>
@@ -21,7 +28,23 @@
     <h3 class="font-weight-bold">{{label}} {{prodi}}</h3>
     {% endif %}
       <p class="font-weight-light">Universitas Prasetiya Mulya</p>
-      {% if roles == 'Admin' or roles == 'Admin Prodi'%}
+      {% if roles == 'Admin'%}
+      <a class="btn btn-primary" href="{% url 'folder-create' kategori=kategori pk_prodi=pk_prodi %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>    
+        Add new folder
+      </a>
+      {% elif roles == 'Admin Prodi' and kategori == 'AMI' %}
+      <a class="btn btn-primary" href="{% url 'folder-create' kategori=kategori pk_prodi=pk_prodi %}">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>    
+        Add new folder
+      </a>
+      {% elif roles == 'Admin Prodi' and kategori == 'ABPT' %}
       <a class="btn btn-primary" href="{% url 'folder-create' kategori=kategori pk_prodi=pk_prodi %}">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -41,7 +64,20 @@
             <path fill-rule="evenodd" d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z"/>
           </svg>
           <a class="text-decoration-none text-reset text-control">{{item.nama_folder}}</a>
-          {% if roles == 'Admin' or roles == 'Admin Prodi' %}
+          {% if roles == 'Admin'%}
+          <div class=end-box>
+            <a class="text-decoration-none text-reset text-control">{{item.updated_at}}</a>
+            <a href="{% url 'folder-update' kategori=kategori pk_prodi=item.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+            <a href="{% url 'folder-delete' kategori=kategori pk_prodi=item.id %}" class="btn btn-danger btn-card-menu">Delete</a>
+          </div>
+          {% elif roles == 'Admin Prodi' and kategori == 'AMI' %}
+          <a>testing</a>
+          <div class=end-box>
+            <a class="text-decoration-none text-reset text-control">{{item.updated_at}}</a>
+            <a href="{% url 'folder-update' kategori=kategori pk_prodi=item.id %}" class="btn btn-warning btn-card-menu">Edit</a>
+            <a href="{% url 'folder-delete' kategori=kategori pk_prodi=item.id %}" class="btn btn-danger btn-card-menu">Delete</a>
+          </div>
+          {% elif roles == 'Admin Prodi' and kategori == 'ABPT' %}
           <div class=end-box>
             <a class="text-decoration-none text-reset text-control">{{item.updated_at}}</a>
             <a href="{% url 'folder-update' kategori=kategori pk_prodi=item.id %}" class="btn btn-warning btn-card-menu">Edit</a>
