@@ -756,7 +756,7 @@ class SubFile1Create(CreateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.SubFolder01.objects.get(id=pk)
-        context["prodi_name"] = prodi_name
+        context["prodi_name"] = prodi_name.nama_folder
         context["crud"] = 'Add New File'
         return context
 
@@ -898,7 +898,7 @@ class SubFile2Create(CreateView):
         pk = self.kwargs.get('pk_parent')
         prodi_name = models.SubFolder02.objects.get(id=pk)
         context["crud"] = 'Add New File'
-        context["prodi_name"] = prodi_name
+        context["prodi_name"] = prodi_name.nama_folder
         return context
 
 class SubFile2Update(UpdateView):

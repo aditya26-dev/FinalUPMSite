@@ -17,7 +17,7 @@ class FormAddFileBukuPanduan(ModelForm):
 class FormAddFolder(ModelForm):
     class Meta:
         model = Folder
-        fields = '__all__'
+        fields = ['nama_folder', 'nama_prodi', 'kategori', 'public_status']
         widgets = {
             'nama_folder' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Tulis nama Folder di sini ...'}),
             'nama_prodi' : forms.Select(attrs={'class': 'form-control', 'remove_attr':"autofocus"}),
