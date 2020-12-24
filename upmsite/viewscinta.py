@@ -249,6 +249,8 @@ def SubFolder1List(request, pk_parent):
                 'totalfolder': totalfolder,
             }
     elif amiumum.kategori == 'Informasi Umum':
+        roles = request.user.roles
+
         subfolder1 = models.SubFolder01.objects.filter(parent_folder__id = pk_parent)
         files = models.File.objects.filter(nama_folder__id = pk_parent)
         folder = models.Folder.objects.get(id = pk_parent)
