@@ -123,9 +123,10 @@ AUTH_USER_MODEL = 'Accounts.User'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    "static",
-]
+#STATICFILES_DIRS = [
+#    "static",
+#]
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'static' / 'media'
